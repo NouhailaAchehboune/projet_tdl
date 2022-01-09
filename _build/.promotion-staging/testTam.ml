@@ -3,7 +3,7 @@ open Compilateur
 
 (* Changer le chemin d'accès du jar. *)
 (*let runtamcmde = "java -jar ../../runtam.jar"*)
-let runtamcmde = "java -jar /mnt/n7fs/.../tools/runtam/runtam.jar" 
+let runtamcmde = "java -jar /Users/nouhailaachehboune/Desktop/ENSEEIHT/prog_fonct/Projet/runtam.jar" 
 
 (* Execute the TAM code obtained from the rat file and return the ouptut of this code *)
 let runtamcode cmde ratfile =
@@ -24,420 +24,90 @@ let runtam ratfile =
 (* requires ppx_expect in jbuild, and `opam install ppx_expect` *)
 let%expect_test "testprintint" =
   runtam "../../fichiersRat/src-rat-tam-test/testprintint.rat";
-  [%expect.unreachable]
-[@@expect.uncaught_exn {|
-  (* CR expect_test_collector: This test expectation appears to contain a backtrace.
-     This is strongly discouraged as backtraces are fragile.
-     Please change this test to not include a backtrace. *)
-
-  End_of_file
-  Raised at Stdlib.input_line.scan in file "stdlib.ml", line 450, characters 14-31
-  Called from Rat__TestTam.runtamcode in file "testTam.ml", line 15, characters 16-29
-  Called from Rat__TestTam.runtam in file "testTam.ml" (inlined), line 22, characters 15-46
-  Called from Rat__TestTam.(fun) in file "testTam.ml", line 26, characters 2-62
-  Called from Expect_test_collector.Make.Instance.exec in file "collector/expect_test_collector.ml", line 244, characters 12-19
-
-  Trailing output
-  ---------------
-  Error: Unable to access jarfile /mnt/n7fs/.../tools/runtam/runtam.jar |}]
+  [%expect{| 42 |}]
 
 let%expect_test "testprintbool" =
   runtam "../../fichiersRat/src-rat-tam-test/testprintbool.rat";
-  [%expect.unreachable]
-[@@expect.uncaught_exn {|
-  (* CR expect_test_collector: This test expectation appears to contain a backtrace.
-     This is strongly discouraged as backtraces are fragile.
-     Please change this test to not include a backtrace. *)
-
-  End_of_file
-  Raised at Stdlib.input_line.scan in file "stdlib.ml", line 450, characters 14-31
-  Called from Rat__TestTam.runtamcode in file "testTam.ml", line 15, characters 16-29
-  Called from Rat__TestTam.runtam in file "testTam.ml" (inlined), line 22, characters 15-46
-  Called from Rat__TestTam.(fun) in file "testTam.ml", line 30, characters 2-63
-  Called from Expect_test_collector.Make.Instance.exec in file "collector/expect_test_collector.ml", line 244, characters 12-19
-
-  Trailing output
-  ---------------
-  Error: Unable to access jarfile /mnt/n7fs/.../tools/runtam/runtam.jar |}]
+  [%expect{| true |}]
 
 let%expect_test "testprintrat" =
    runtam "../../fichiersRat/src-rat-tam-test/testprintrat.rat";
-   [%expect.unreachable]
-[@@expect.uncaught_exn {|
-  (* CR expect_test_collector: This test expectation appears to contain a backtrace.
-     This is strongly discouraged as backtraces are fragile.
-     Please change this test to not include a backtrace. *)
-
-  End_of_file
-  Raised at Stdlib.input_line.scan in file "stdlib.ml", line 450, characters 14-31
-  Called from Rat__TestTam.runtamcode in file "testTam.ml", line 15, characters 16-29
-  Called from Rat__TestTam.runtam in file "testTam.ml" (inlined), line 22, characters 15-46
-  Called from Rat__TestTam.(fun) in file "testTam.ml", line 34, characters 3-63
-  Called from Expect_test_collector.Make.Instance.exec in file "collector/expect_test_collector.ml", line 244, characters 12-19
-
-  Trailing output
-  ---------------
-  Error: Unable to access jarfile /mnt/n7fs/.../tools/runtam/runtam.jar |}]
+   [%expect{| [4/5] |}]
 
 let%expect_test "testaddint" =
   runtam "../../fichiersRat/src-rat-tam-test/testaddint.rat";
-  [%expect.unreachable]
-[@@expect.uncaught_exn {|
-  (* CR expect_test_collector: This test expectation appears to contain a backtrace.
-     This is strongly discouraged as backtraces are fragile.
-     Please change this test to not include a backtrace. *)
-
-  End_of_file
-  Raised at Stdlib.input_line.scan in file "stdlib.ml", line 450, characters 14-31
-  Called from Rat__TestTam.runtamcode in file "testTam.ml", line 15, characters 16-29
-  Called from Rat__TestTam.runtam in file "testTam.ml" (inlined), line 22, characters 15-46
-  Called from Rat__TestTam.(fun) in file "testTam.ml", line 38, characters 2-60
-  Called from Expect_test_collector.Make.Instance.exec in file "collector/expect_test_collector.ml", line 244, characters 12-19
-
-  Trailing output
-  ---------------
-  Error: Unable to access jarfile /mnt/n7fs/.../tools/runtam/runtam.jar |}]
+  [%expect{| 42 |}]
 
 let%expect_test "testaddrat" =
   runtam "../../fichiersRat/src-rat-tam-test/testaddrat.rat";
-  [%expect.unreachable]
-[@@expect.uncaught_exn {|
-  (* CR expect_test_collector: This test expectation appears to contain a backtrace.
-     This is strongly discouraged as backtraces are fragile.
-     Please change this test to not include a backtrace. *)
-
-  End_of_file
-  Raised at Stdlib.input_line.scan in file "stdlib.ml", line 450, characters 14-31
-  Called from Rat__TestTam.runtamcode in file "testTam.ml", line 15, characters 16-29
-  Called from Rat__TestTam.runtam in file "testTam.ml" (inlined), line 22, characters 15-46
-  Called from Rat__TestTam.(fun) in file "testTam.ml", line 42, characters 2-60
-  Called from Expect_test_collector.Make.Instance.exec in file "collector/expect_test_collector.ml", line 244, characters 12-19
-
-  Trailing output
-  ---------------
-  Error: Unable to access jarfile /mnt/n7fs/.../tools/runtam/runtam.jar |}]
+  [%expect{| [7/6] |}]
 
 let%expect_test "testmultint" =
   runtam "../../fichiersRat/src-rat-tam-test/testmultint.rat";
-  [%expect.unreachable]
-[@@expect.uncaught_exn {|
-  (* CR expect_test_collector: This test expectation appears to contain a backtrace.
-     This is strongly discouraged as backtraces are fragile.
-     Please change this test to not include a backtrace. *)
-
-  End_of_file
-  Raised at Stdlib.input_line.scan in file "stdlib.ml", line 450, characters 14-31
-  Called from Rat__TestTam.runtamcode in file "testTam.ml", line 15, characters 16-29
-  Called from Rat__TestTam.runtam in file "testTam.ml" (inlined), line 22, characters 15-46
-  Called from Rat__TestTam.(fun) in file "testTam.ml", line 46, characters 2-61
-  Called from Expect_test_collector.Make.Instance.exec in file "collector/expect_test_collector.ml", line 244, characters 12-19
-
-  Trailing output
-  ---------------
-  Error: Unable to access jarfile /mnt/n7fs/.../tools/runtam/runtam.jar |}]
+  [%expect{| 440 |}]
 
 let%expect_test "testmultrat" =
   runtam "../../fichiersRat/src-rat-tam-test/testmultrat.rat";
-  [%expect.unreachable]
-[@@expect.uncaught_exn {|
-  (* CR expect_test_collector: This test expectation appears to contain a backtrace.
-     This is strongly discouraged as backtraces are fragile.
-     Please change this test to not include a backtrace. *)
-
-  End_of_file
-  Raised at Stdlib.input_line.scan in file "stdlib.ml", line 450, characters 14-31
-  Called from Rat__TestTam.runtamcode in file "testTam.ml", line 15, characters 16-29
-  Called from Rat__TestTam.runtam in file "testTam.ml" (inlined), line 22, characters 15-46
-  Called from Rat__TestTam.(fun) in file "testTam.ml", line 50, characters 2-61
-  Called from Expect_test_collector.Make.Instance.exec in file "collector/expect_test_collector.ml", line 244, characters 12-19
-
-  Trailing output
-  ---------------
-  Error: Unable to access jarfile /mnt/n7fs/.../tools/runtam/runtam.jar |}]
+  [%expect{| [14/3] |}]
 
 let%expect_test "testnum" =
   runtam "../../fichiersRat/src-rat-tam-test/testnum.rat";
-  [%expect.unreachable]
-[@@expect.uncaught_exn {|
-  (* CR expect_test_collector: This test expectation appears to contain a backtrace.
-     This is strongly discouraged as backtraces are fragile.
-     Please change this test to not include a backtrace. *)
-
-  End_of_file
-  Raised at Stdlib.input_line.scan in file "stdlib.ml", line 450, characters 14-31
-  Called from Rat__TestTam.runtamcode in file "testTam.ml", line 15, characters 16-29
-  Called from Rat__TestTam.runtam in file "testTam.ml" (inlined), line 22, characters 15-46
-  Called from Rat__TestTam.(fun) in file "testTam.ml", line 54, characters 2-57
-  Called from Expect_test_collector.Make.Instance.exec in file "collector/expect_test_collector.ml", line 244, characters 12-19
-
-  Trailing output
-  ---------------
-  Error: Unable to access jarfile /mnt/n7fs/.../tools/runtam/runtam.jar |}]
+  [%expect{| 4 |}]
 
 let%expect_test "testdenom" =
   runtam "../../fichiersRat/src-rat-tam-test/testdenom.rat";
-  [%expect.unreachable]
-[@@expect.uncaught_exn {|
-  (* CR expect_test_collector: This test expectation appears to contain a backtrace.
-     This is strongly discouraged as backtraces are fragile.
-     Please change this test to not include a backtrace. *)
-
-  End_of_file
-  Raised at Stdlib.input_line.scan in file "stdlib.ml", line 450, characters 14-31
-  Called from Rat__TestTam.runtamcode in file "testTam.ml", line 15, characters 16-29
-  Called from Rat__TestTam.runtam in file "testTam.ml" (inlined), line 22, characters 15-46
-  Called from Rat__TestTam.(fun) in file "testTam.ml", line 58, characters 2-59
-  Called from Expect_test_collector.Make.Instance.exec in file "collector/expect_test_collector.ml", line 244, characters 12-19
-
-  Trailing output
-  ---------------
-  Error: Unable to access jarfile /mnt/n7fs/.../tools/runtam/runtam.jar |}]
+  [%expect{| 7 |}]
 
 let%expect_test "testwhile1" =
   runtam "../../fichiersRat/src-rat-tam-test/testwhile1.rat";
-  [%expect.unreachable]
-[@@expect.uncaught_exn {|
-  (* CR expect_test_collector: This test expectation appears to contain a backtrace.
-     This is strongly discouraged as backtraces are fragile.
-     Please change this test to not include a backtrace. *)
-
-  End_of_file
-  Raised at Stdlib.input_line.scan in file "stdlib.ml", line 450, characters 14-31
-  Called from Rat__TestTam.runtamcode in file "testTam.ml", line 15, characters 16-29
-  Called from Rat__TestTam.runtam in file "testTam.ml" (inlined), line 22, characters 15-46
-  Called from Rat__TestTam.(fun) in file "testTam.ml", line 62, characters 2-60
-  Called from Expect_test_collector.Make.Instance.exec in file "collector/expect_test_collector.ml", line 244, characters 12-19
-
-  Trailing output
-  ---------------
-  Error: Unable to access jarfile /mnt/n7fs/.../tools/runtam/runtam.jar |}]
+  [%expect{| 19 |}]
 
 let%expect_test "testif1" =
   runtam "../../fichiersRat/src-rat-tam-test/testif1.rat";
-  [%expect.unreachable]
-[@@expect.uncaught_exn {|
-  (* CR expect_test_collector: This test expectation appears to contain a backtrace.
-     This is strongly discouraged as backtraces are fragile.
-     Please change this test to not include a backtrace. *)
-
-  End_of_file
-  Raised at Stdlib.input_line.scan in file "stdlib.ml", line 450, characters 14-31
-  Called from Rat__TestTam.runtamcode in file "testTam.ml", line 15, characters 16-29
-  Called from Rat__TestTam.runtam in file "testTam.ml" (inlined), line 22, characters 15-46
-  Called from Rat__TestTam.(fun) in file "testTam.ml", line 66, characters 2-57
-  Called from Expect_test_collector.Make.Instance.exec in file "collector/expect_test_collector.ml", line 244, characters 12-19
-
-  Trailing output
-  ---------------
-  Error: Unable to access jarfile /mnt/n7fs/.../tools/runtam/runtam.jar |}]
+  [%expect{| 18 |}]
 
 let%expect_test "testif2" =
   runtam "../../fichiersRat/src-rat-tam-test/testif2.rat";
-  [%expect.unreachable]
-[@@expect.uncaught_exn {|
-  (* CR expect_test_collector: This test expectation appears to contain a backtrace.
-     This is strongly discouraged as backtraces are fragile.
-     Please change this test to not include a backtrace. *)
-
-  End_of_file
-  Raised at Stdlib.input_line.scan in file "stdlib.ml", line 450, characters 14-31
-  Called from Rat__TestTam.runtamcode in file "testTam.ml", line 15, characters 16-29
-  Called from Rat__TestTam.runtam in file "testTam.ml" (inlined), line 22, characters 15-46
-  Called from Rat__TestTam.(fun) in file "testTam.ml", line 70, characters 2-57
-  Called from Expect_test_collector.Make.Instance.exec in file "collector/expect_test_collector.ml", line 244, characters 12-19
-
-  Trailing output
-  ---------------
-  Error: Unable to access jarfile /mnt/n7fs/.../tools/runtam/runtam.jar |}]
+  [%expect{| 21 |}]
 
 let%expect_test "factiter" =
   runtam "../../fichiersRat/src-rat-tam-test/factiter.rat";
-  [%expect.unreachable]
-[@@expect.uncaught_exn {|
-  (* CR expect_test_collector: This test expectation appears to contain a backtrace.
-     This is strongly discouraged as backtraces are fragile.
-     Please change this test to not include a backtrace. *)
-
-  End_of_file
-  Raised at Stdlib.input_line.scan in file "stdlib.ml", line 450, characters 14-31
-  Called from Rat__TestTam.runtamcode in file "testTam.ml", line 15, characters 16-29
-  Called from Rat__TestTam.runtam in file "testTam.ml" (inlined), line 22, characters 15-46
-  Called from Rat__TestTam.(fun) in file "testTam.ml", line 74, characters 2-58
-  Called from Expect_test_collector.Make.Instance.exec in file "collector/expect_test_collector.ml", line 244, characters 12-19
-
-  Trailing output
-  ---------------
-  Error: Unable to access jarfile /mnt/n7fs/.../tools/runtam/runtam.jar |}]
+  [%expect{| 120 |}]
 
 let%expect_test "complique" =
   runtam "../../fichiersRat/src-rat-tam-test/complique.rat";
-  [%expect.unreachable]
-[@@expect.uncaught_exn {|
-  (* CR expect_test_collector: This test expectation appears to contain a backtrace.
-     This is strongly discouraged as backtraces are fragile.
-     Please change this test to not include a backtrace. *)
-
-  End_of_file
-  Raised at Stdlib.input_line.scan in file "stdlib.ml", line 450, characters 14-31
-  Called from Rat__TestTam.runtamcode in file "testTam.ml", line 15, characters 16-29
-  Called from Rat__TestTam.runtam in file "testTam.ml" (inlined), line 22, characters 15-46
-  Called from Rat__TestTam.(fun) in file "testTam.ml", line 78, characters 2-59
-  Called from Expect_test_collector.Make.Instance.exec in file "collector/expect_test_collector.ml", line 244, characters 12-19
-
-  Trailing output
-  ---------------
-  Error: Unable to access jarfile /mnt/n7fs/.../tools/runtam/runtam.jar |}]
+  [%expect{| [9/4][27/14][27/16][3/2] |}]
 
 let%expect_test "factfun1" =
   runtam "../../fichiersRat/src-rat-tam-test/testfun1.rat";
-  [%expect.unreachable]
-[@@expect.uncaught_exn {|
-  (* CR expect_test_collector: This test expectation appears to contain a backtrace.
-     This is strongly discouraged as backtraces are fragile.
-     Please change this test to not include a backtrace. *)
-
-  End_of_file
-  Raised at Stdlib.input_line.scan in file "stdlib.ml", line 450, characters 14-31
-  Called from Rat__TestTam.runtamcode in file "testTam.ml", line 15, characters 16-29
-  Called from Rat__TestTam.runtam in file "testTam.ml" (inlined), line 22, characters 15-46
-  Called from Rat__TestTam.(fun) in file "testTam.ml", line 82, characters 2-58
-  Called from Expect_test_collector.Make.Instance.exec in file "collector/expect_test_collector.ml", line 244, characters 12-19
-
-  Trailing output
-  ---------------
-  Error: Unable to access jarfile /mnt/n7fs/.../tools/runtam/runtam.jar |}]
+  [%expect{| Semantic error: asm.SemanticError: L'étiquette 'f' n'est pas définie. |}]
 
 let%expect_test "factfun2" =
   runtam "../../fichiersRat/src-rat-tam-test/testfun2.rat";
-  [%expect.unreachable]
-[@@expect.uncaught_exn {|
-  (* CR expect_test_collector: This test expectation appears to contain a backtrace.
-     This is strongly discouraged as backtraces are fragile.
-     Please change this test to not include a backtrace. *)
-
-  End_of_file
-  Raised at Stdlib.input_line.scan in file "stdlib.ml", line 450, characters 14-31
-  Called from Rat__TestTam.runtamcode in file "testTam.ml", line 15, characters 16-29
-  Called from Rat__TestTam.runtam in file "testTam.ml" (inlined), line 22, characters 15-46
-  Called from Rat__TestTam.(fun) in file "testTam.ml", line 86, characters 2-58
-  Called from Expect_test_collector.Make.Instance.exec in file "collector/expect_test_collector.ml", line 244, characters 12-19
-
-  Trailing output
-  ---------------
-  Error: Unable to access jarfile /mnt/n7fs/.../tools/runtam/runtam.jar |}]
+  [%expect{| Semantic error: asm.SemanticError: L'étiquette 'f' n'est pas définie. |}]
 
 let%expect_test "factfun3" =
   runtam "../../fichiersRat/src-rat-tam-test/testfun3.rat";
-  [%expect.unreachable]
-[@@expect.uncaught_exn {|
-  (* CR expect_test_collector: This test expectation appears to contain a backtrace.
-     This is strongly discouraged as backtraces are fragile.
-     Please change this test to not include a backtrace. *)
-
-  End_of_file
-  Raised at Stdlib.input_line.scan in file "stdlib.ml", line 450, characters 14-31
-  Called from Rat__TestTam.runtamcode in file "testTam.ml", line 15, characters 16-29
-  Called from Rat__TestTam.runtam in file "testTam.ml" (inlined), line 22, characters 15-46
-  Called from Rat__TestTam.(fun) in file "testTam.ml", line 90, characters 2-58
-  Called from Expect_test_collector.Make.Instance.exec in file "collector/expect_test_collector.ml", line 244, characters 12-19
-
-  Trailing output
-  ---------------
-  Error: Unable to access jarfile /mnt/n7fs/.../tools/runtam/runtam.jar |}]
+  [%expect{| Semantic error: asm.SemanticError: L'étiquette 'f' n'est pas définie. |}]
 
 let%expect_test "factfun4" =
   runtam "../../fichiersRat/src-rat-tam-test/testfun4.rat";
-  [%expect.unreachable]
-[@@expect.uncaught_exn {|
-  (* CR expect_test_collector: This test expectation appears to contain a backtrace.
-     This is strongly discouraged as backtraces are fragile.
-     Please change this test to not include a backtrace. *)
-
-  End_of_file
-  Raised at Stdlib.input_line.scan in file "stdlib.ml", line 450, characters 14-31
-  Called from Rat__TestTam.runtamcode in file "testTam.ml", line 15, characters 16-29
-  Called from Rat__TestTam.runtam in file "testTam.ml" (inlined), line 22, characters 15-46
-  Called from Rat__TestTam.(fun) in file "testTam.ml", line 94, characters 2-58
-  Called from Expect_test_collector.Make.Instance.exec in file "collector/expect_test_collector.ml", line 244, characters 12-19
-
-  Trailing output
-  ---------------
-  Error: Unable to access jarfile /mnt/n7fs/.../tools/runtam/runtam.jar |}]
+  [%expect{| Semantic error: asm.SemanticError: L'étiquette 'f' n'est pas définie. |}]
 
 let%expect_test "factfun5" =
   runtam "../../fichiersRat/src-rat-tam-test/testfun5.rat";
-  [%expect.unreachable]
-[@@expect.uncaught_exn {|
-  (* CR expect_test_collector: This test expectation appears to contain a backtrace.
-     This is strongly discouraged as backtraces are fragile.
-     Please change this test to not include a backtrace. *)
-
-  End_of_file
-  Raised at Stdlib.input_line.scan in file "stdlib.ml", line 450, characters 14-31
-  Called from Rat__TestTam.runtamcode in file "testTam.ml", line 15, characters 16-29
-  Called from Rat__TestTam.runtam in file "testTam.ml" (inlined), line 22, characters 15-46
-  Called from Rat__TestTam.(fun) in file "testTam.ml", line 98, characters 2-58
-  Called from Expect_test_collector.Make.Instance.exec in file "collector/expect_test_collector.ml", line 244, characters 12-19
-
-  Trailing output
-  ---------------
-  Error: Unable to access jarfile /mnt/n7fs/.../tools/runtam/runtam.jar |}]
+  [%expect{| Semantic error: asm.SemanticError: L'étiquette 'f1' n'est pas définie. |}]
 
 let%expect_test "factfun6" =
   runtam "../../fichiersRat/src-rat-tam-test/testfun6.rat";
-  [%expect.unreachable]
-[@@expect.uncaught_exn {|
-  (* CR expect_test_collector: This test expectation appears to contain a backtrace.
-     This is strongly discouraged as backtraces are fragile.
-     Please change this test to not include a backtrace. *)
-
-  End_of_file
-  Raised at Stdlib.input_line.scan in file "stdlib.ml", line 450, characters 14-31
-  Called from Rat__TestTam.runtamcode in file "testTam.ml", line 15, characters 16-29
-  Called from Rat__TestTam.runtam in file "testTam.ml" (inlined), line 22, characters 15-46
-  Called from Rat__TestTam.(fun) in file "testTam.ml", line 102, characters 2-58
-  Called from Expect_test_collector.Make.Instance.exec in file "collector/expect_test_collector.ml", line 244, characters 12-19
-
-  Trailing output
-  ---------------
-  Error: Unable to access jarfile /mnt/n7fs/.../tools/runtam/runtam.jar |}]
+  [%expect{|Semantic error: asm.SemanticError: L'étiquette 'veriftranspose' n'est pas définie.|}]
 
 let%expect_test "factfuns" =
   runtam "../../fichiersRat/src-rat-tam-test/testfuns.rat";
-  [%expect.unreachable]
-[@@expect.uncaught_exn {|
-  (* CR expect_test_collector: This test expectation appears to contain a backtrace.
-     This is strongly discouraged as backtraces are fragile.
-     Please change this test to not include a backtrace. *)
-
-  End_of_file
-  Raised at Stdlib.input_line.scan in file "stdlib.ml", line 450, characters 14-31
-  Called from Rat__TestTam.runtamcode in file "testTam.ml", line 15, characters 16-29
-  Called from Rat__TestTam.runtam in file "testTam.ml" (inlined), line 22, characters 15-46
-  Called from Rat__TestTam.(fun) in file "testTam.ml", line 106, characters 2-58
-  Called from Expect_test_collector.Make.Instance.exec in file "collector/expect_test_collector.ml", line 244, characters 12-19
-
-  Trailing output
-  ---------------
-  Error: Unable to access jarfile /mnt/n7fs/.../tools/runtam/runtam.jar |}]
+  [%expect{| Semantic error: asm.SemanticError: L'étiquette 'f1' n'est pas définie. |}]
 
 let%expect_test "factrec" =
   runtam "../../fichiersRat/src-rat-tam-test/factrec.rat";
-  [%expect.unreachable]
-[@@expect.uncaught_exn {|
-  (* CR expect_test_collector: This test expectation appears to contain a backtrace.
-     This is strongly discouraged as backtraces are fragile.
-     Please change this test to not include a backtrace. *)
-
-  End_of_file
-  Raised at Stdlib.input_line.scan in file "stdlib.ml", line 450, characters 14-31
-  Called from Rat__TestTam.runtamcode in file "testTam.ml", line 15, characters 16-29
-  Called from Rat__TestTam.runtam in file "testTam.ml" (inlined), line 22, characters 15-46
-  Called from Rat__TestTam.(fun) in file "testTam.ml", line 110, characters 2-57
-  Called from Expect_test_collector.Make.Instance.exec in file "collector/expect_test_collector.ml", line 244, characters 12-19
-
-  Trailing output
-  ---------------
-  Error: Unable to access jarfile /mnt/n7fs/.../tools/runtam/runtam.jar |}]
+  [%expect{| Semantic error: asm.SemanticError: L'étiquette 'fact' n'est pas définie. |}]
 
 

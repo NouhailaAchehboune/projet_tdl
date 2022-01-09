@@ -162,7 +162,7 @@ let rec fusion l1 l2=
   |AstType.Declaration(ia,e) -> let InfoVar(_,t,add,reg) = info_ast_to_info ia in
     let codee=analyse_expression (e,t) in
     let taille=string_of_int (getTaille t) in
-    ("PUSH ("^taille^") \n"^codee^"STORE ("^taille^") "^(string_of_int add)^"["^reg^"] \n",(getTaille t))
+    ("PUSH "^taille^" \n"^codee^"STORE ("^taille^") "^(string_of_int add)^"["^reg^"] \n",(getTaille t))
   |AstType.Affectation(ia,e) -> let InfoVar(_,t,add,reg) = info_ast_to_info ia in
     let codee=analyse_expression (e,t) in
     let taille=string_of_int (getTaille t) in
@@ -170,7 +170,8 @@ let rec fusion l1 l2=
   |AstType.AffichageInt(e) -> let codee=analyse_expression (e,Int) in
     (codee^"SUBR IOut \n",0)
   |AstType.AffichageRat(e) -> let codee=analyse_expression (e,Rat) in
-    (codee^"CALL (SB) ROut",0)
+    (codee^"CALL (SB) ROut \n",0)
+  
   |AstType.AffichageBool(e) -> let codee=analyse_expression (e,Bool) in
     (codee^"SUBR BOut \n",0)
   |AstType.Conditionnelle(e,bt,be) ->
@@ -187,7 +188,7 @@ let rec fusion l1 l2=
   let bloc_while=(getEtiquette ()) in
   let fin_while=(getEtiquette() ) in
   let codebl=analyse_bloc tr tp bl in
-  (bloc_while^"/n"^codee^"JUMPIF (0) "^fin_while^"\n"^codebl^"JUMP "^bloc_while^"\n"^fin_while^"\n",0)
+  (bloc_while^" \n"^codee^"JUMPIF (0) "^fin_while^" \n"^codebl^"JUMP "^bloc_while^" \n"^fin_while^" \n",0)
   |AstType.Empty ->("",0)
 
   and analyse_bloc tr tp bl = let nbl= List.map (analyse_instruction tr tp) bl in
