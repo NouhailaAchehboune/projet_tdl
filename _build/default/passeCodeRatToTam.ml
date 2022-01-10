@@ -141,7 +141,10 @@ let rec fusion l1 l2=
     |AstType.Ident(ia)-> let InfoVar(_,_,add,reg) = info_ast_to_info ia in
     let ta = (Type.getTaille t) in 
         "LOAD ("^(string_of_int ta)^") "^string_of_int add^"["^reg^"] \n"
-    |AstType.Entier(i) ->  
+    |AstType.Entier(i) -> 
+     if (i=Null) then 
+      "" 
+     else 
     "LOADL "^(string_of_int i)^"\n"
     |AstType.Unaire(u,e1) -> let code1=analyse_expression (e1,Rat) in
     let code2=analyse_unaire(u) in
