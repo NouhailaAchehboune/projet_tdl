@@ -1,0 +1,14 @@
+; /Users/nouhailaachehboune/Desktop/ENSEEIHT/prog_fonct/Projet/fichiersRat/src-rat-tam-test/testfun2.rat
+Jump main 
+f
+LOAD (1) -1[LB] 
+RETURN (1) 0
+POP (0) 0
+main 
+LOADL 3
+LOADL 4
+SUBR IAdd 
+CALL (SB) f
+SUBR IOut 
+POP (0) 0
+HALT 

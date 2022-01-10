@@ -32,7 +32,7 @@ let%expect_test "testprintbool" =
 
 let%expect_test "testprintrat" =
    runtam "../../fichiersRat/src-rat-tam-test/testprintrat.rat";
-   [%expect{| Semantic error: asm.SemanticError: L'étiquette 'rout' n'est pas définie. |}]
+   [%expect{| [4/5] |}]
 
 let%expect_test "testaddint" =
   runtam "../../fichiersRat/src-rat-tam-test/testaddint.rat";
@@ -40,7 +40,7 @@ let%expect_test "testaddint" =
 
 let%expect_test "testaddrat" =
   runtam "../../fichiersRat/src-rat-tam-test/testaddrat.rat";
-  [%expect{| Semantic error: asm.SemanticError: L'étiquette 'rout' n'est pas définie. |}]
+  [%expect{| [7/6] |}]
 
 let%expect_test "testmultint" =
   runtam "../../fichiersRat/src-rat-tam-test/testmultint.rat";
@@ -48,7 +48,7 @@ let%expect_test "testmultint" =
 
 let%expect_test "testmultrat" =
   runtam "../../fichiersRat/src-rat-tam-test/testmultrat.rat";
-  [%expect{| Semantic error: asm.SemanticError: L'étiquette 'rmul' n'est pas définie. |}]
+  [%expect{| [14/3] |}]
 
 let%expect_test "testnum" =
   runtam "../../fichiersRat/src-rat-tam-test/testnum.rat";
@@ -76,38 +76,38 @@ let%expect_test "factiter" =
 
 let%expect_test "complique" =
   runtam "../../fichiersRat/src-rat-tam-test/complique.rat";
-  [%expect{| Semantic error: asm.SemanticError: L'étiquette 'rmul' n'est pas définie. |}]
+  [%expect{| [9/4][27/14][27/16][3/2] |}]
 
 let%expect_test "factfun1" =
   runtam "../../fichiersRat/src-rat-tam-test/testfun1.rat";
-  [%expect{| Syntax Error: java.util.EmptyStackException |}]
+  [%expect{| Semantic error: asm.SemanticError: Ligne 6 : double déclaration de l'étiquette 'main'. |}]
 
 let%expect_test "factfun2" =
   runtam "../../fichiersRat/src-rat-tam-test/testfun2.rat";
-  [%expect{| tam.TamException: Tam error : Program has failed due to a memory or stack error |}]
+  [%expect{| Semantic error: asm.SemanticError: Ligne 6 : double déclaration de l'étiquette 'main'. |}]
 
 let%expect_test "factfun3" =
   runtam "../../fichiersRat/src-rat-tam-test/testfun3.rat";
-  [%expect{| tam.TamException: Tam error : Program has failed due to a memory or stack error |}]
+  [%expect{| Semantic error: asm.SemanticError: Ligne 8 : double déclaration de l'étiquette 'main'. |}]
 
 let%expect_test "factfun4" =
   runtam "../../fichiersRat/src-rat-tam-test/testfun4.rat";
-  [%expect{| tam.TamException: Tam error : Program has failed due to a memory or stack error |}]
+  [%expect{| Semantic error: asm.SemanticError: Ligne 8 : double déclaration de l'étiquette 'main'. |}]
 
 let%expect_test "factfun5" =
   runtam "../../fichiersRat/src-rat-tam-test/testfun5.rat";
-  [%expect{| tam.TamException: Tam error : Program has failed due to a memory or stack error |}]
+  [%expect{| Semantic error: asm.SemanticError: Ligne 7 : double déclaration de l'étiquette 'main'. |}]
 
 let%expect_test "factfun6" =
   runtam "../../fichiersRat/src-rat-tam-test/testfun6.rat";
-  [%expect{|tam.TamException: Tam error : Program has failed due to a memory or stack error|}]
+  [%expect{|Semantic error: asm.SemanticError: Ligne 78 : double déclaration de l'étiquette 'main'.|}]
 
 let%expect_test "factfuns" =
   runtam "../../fichiersRat/src-rat-tam-test/testfuns.rat";
-  [%expect{| tam.TamException: Tam error : Program has failed due to a memory or stack error |}]
+  [%expect{| Semantic error: asm.SemanticError: Ligne 43 : double déclaration de l'étiquette 'main'. |}]
 
 let%expect_test "factrec" =
   runtam "../../fichiersRat/src-rat-tam-test/factrec.rat";
-  [%expect{| tam.TamException: Tam error : Program has failed due to a memory or stack error |}]
+  [%expect{| Semantic error: asm.SemanticError: Ligne 28 : double déclaration de l'étiquette 'main'. |}]
 
 
