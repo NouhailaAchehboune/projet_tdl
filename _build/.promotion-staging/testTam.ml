@@ -80,34 +80,34 @@ let%expect_test "complique" =
 
 let%expect_test "factfun1" =
   runtam "../../fichiersRat/src-rat-tam-test/testfun1.rat";
-  [%expect{| Semantic error: asm.SemanticError: Ligne 6 : double déclaration de l'étiquette 'main'. |}]
+  [%expect{| 1 |}]
 
 let%expect_test "factfun2" =
   runtam "../../fichiersRat/src-rat-tam-test/testfun2.rat";
-  [%expect{| Semantic error: asm.SemanticError: Ligne 6 : double déclaration de l'étiquette 'main'. |}]
+  [%expect{| 7 |}]
 
 let%expect_test "factfun3" =
   runtam "../../fichiersRat/src-rat-tam-test/testfun3.rat";
-  [%expect{| Semantic error: asm.SemanticError: Ligne 8 : double déclaration de l'étiquette 'main'. |}]
+  [%expect{| 10 |}]
 
 let%expect_test "factfun4" =
   runtam "../../fichiersRat/src-rat-tam-test/testfun4.rat";
-  [%expect{| Semantic error: asm.SemanticError: Ligne 8 : double déclaration de l'étiquette 'main'. |}]
+  [%expect{| 10 |}]
 
 let%expect_test "factfun5" =
   runtam "../../fichiersRat/src-rat-tam-test/testfun5.rat";
-  [%expect{| Semantic error: asm.SemanticError: Ligne 7 : double déclaration de l'étiquette 'main'. |}]
+  [%expect{| 0 |}]
 
 let%expect_test "factfun6" =
   runtam "../../fichiersRat/src-rat-tam-test/testfun6.rat";
-  [%expect{|Semantic error: asm.SemanticError: Ligne 78 : double déclaration de l'étiquette 'main'.|}]
+  [%expect{|truetrue|}]
 
 let%expect_test "factfuns" =
   runtam "../../fichiersRat/src-rat-tam-test/testfuns.rat";
-  [%expect{| Semantic error: asm.SemanticError: Ligne 43 : double déclaration de l'étiquette 'main'. |}]
+  [%expect{| 28 |}]
 
 let%expect_test "factrec" =
   runtam "../../fichiersRat/src-rat-tam-test/factrec.rat";
-  [%expect{| Semantic error: asm.SemanticError: Ligne 28 : double déclaration de l'étiquette 'main'. |}]
+  [%expect{| 120 |}]
 
 

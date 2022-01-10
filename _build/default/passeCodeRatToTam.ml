@@ -202,16 +202,15 @@ let rec fusion l1 l2=
   and analyser (Programme(lf,bl))=
   let debu= (getEntete() ) in
   let nbl=analyse_bloc Undefined 0 bl in 
-  let lff = (List.map analyse_fonction lf) in 
-  if lf =[] then
-    debu^"main \n"^nbl^"HALT \n" 
-  else
+  let lff = (List.map analyse_fonction lf) in
   let nlf=List.fold_left (fun x y -> x^y) "" lff in
-    "Jump main \n"^nlf^"main \n"^nbl^"HALT \n"
+    debu^nlf^"main \n"^nbl^"HALT \n"
 
   and  analyse_fonction f = 
      let (Fonction(ia,nlpi,nb)) = f in 
-     let InfoFun(nom,t_ret,l_type) = info_ast_to_info ia in 
-        nom^"\n"^(analyse_bloc t_ret 0 nb)
+     let InfoFun(nom,t_ret,l_type) = info_ast_to_info ia in
+     let listtaille = List.map getTaille l_type in 
+     let taille = List.fold_left (fun x y -> x+y) 0 listtaille in 
+        nom^"\n"^(analyse_bloc t_ret (taille) nb)^"RETURN (0) "^string_of_int (taille)^"\n \n"
    
 end
