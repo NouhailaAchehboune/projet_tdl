@@ -1,0 +1,23 @@
+; /Users/nouhailaachehboune/Desktop/ENSEEIHT/prog_fonct/Projet/fichiersRat/src-rat-tam-test/testfun4.rat
+Jump main 
+f
+LOAD (1) -2[LB] 
+LOAD (1) -1[LB] 
+SUBR IAdd 
+RETURN (1) 0
+POP (0) 0
+main 
+PUSH 1 
+LOADL 3
+LOADL 4
+SUBR IAdd 
+STORE (1) 0[SB] 
+PUSH 1 
+LOADL 3
+STORE (1) 1[SB] 
+LOAD (1) 0[SB] 
+LOAD (1) 1[SB] 
+CALL (SB) f
+SUBR IOut 
+POP (0) 2
+HALT 
