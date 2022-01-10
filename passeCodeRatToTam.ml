@@ -204,7 +204,7 @@ let rec fusion l1 l2=
   let nbl=analyse_bloc Undefined 0 bl in 
   let lff = (List.map analyse_fonction lf) in 
   let nlf=List.fold_left (fun x y -> x^y) "" lff in
-    "Jump main \n"^nlf^"main \n"^nbl^"HALT \n"
+    "Jump main \n"^nlf^nbl^"HALT \n"
 
   and  analyse_fonction f = 
      let (Fonction(ia,nlpi,nb)) = f in 
