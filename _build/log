@@ -1,10 +1,10 @@
 # dune runtest
 # OCAMLPARAM: unset
 # Workspace root: /Users/nouhailaachehboune/Desktop/ENSEEIHT/prog_fonct/Projet
-$ /usr/bin/getconf _NPROCESSORS_ONLN > /var/folders/gt/t4z2td910qqb_tymk4x8x02m0000gn/T/dune6cf397.output 2> /dev/null
+$ /usr/bin/getconf _NPROCESSORS_ONLN > /var/folders/gt/t4z2td910qqb_tymk4x8x02m0000gn/T/dunee78fe7.output 2> /dev/null
 # Auto-detected concurrency: 12
 # disable binary cache
-$ /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/bin/ocamlc.opt -config > /var/folders/gt/t4z2td910qqb_tymk4x8x02m0000gn/T/dune28b841.output
+$ /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/bin/ocamlc.opt -config > /var/folders/gt/t4z2td910qqb_tymk4x8x02m0000gn/T/dunea3aa13.output
 # Dune context:
 #  { name = "default"
 #  ; kind = "default"
@@ -183,6 +183,12 @@ $ (cd _build/default && /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12
 > Warning 8 [partial-match]: this pattern-matching is not exhaustive.
 > Here is an example of a case that is not matched:
 > (InfoConst (_, _)|InfoFun (_, _, _))
+> File "passeCodeRatToTam.ml", lines 211-212, characters 5-42:
+> 211 | .....let InfoFun(nom,t_ret,l_type) = info_ast_to_info ia in 
+> 212 |         nom^"\n"^(analyse_bloc t_ret 0 nb)
+> Warning 8 [partial-match]: this pattern-matching is not exhaustive.
+> Here is an example of a case that is not matched:
+> (InfoConst (_, _)|InfoVar (_, _, _, _))
 > File "passeCodeRatToTam.ml", line 4, characters 2-17:
 > 4 |   open Exceptions
 >       ^^^^^^^^^^^^^^^
@@ -203,10 +209,22 @@ $ (cd _build/default && /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12
 > 155 |     let InfoFun(nom,t_ret,l_type) = info_ast_to_info ia in
 >                           ^^^^^
 > Warning 27 [unused-var-strict]: unused variable t_ret.
-> File "passeCodeRatToTam.ml", line 202, characters 26-28:
-> 202 |   let analyser (Programme(lf,bl))=
->                                 ^^
-> Warning 27 [unused-var-strict]: unused variable lf.
+> File "passeCodeRatToTam.ml", line 203, characters 6-10:
+> 203 |   let debu= (getEntete() ) in
+>             ^^^^
+> Warning 26 [unused-var]: unused variable debu.
+> File "passeCodeRatToTam.ml", line 210, characters 22-26:
+> 210 |      let (Fonction(ia,nlpi,nb)) = f in 
+>                             ^^^^
+> Warning 27 [unused-var-strict]: unused variable nlpi.
+> File "passeCodeRatToTam.ml", line 211, characters 27-33:
+> 211 |      let InfoFun(nom,t_ret,l_type) = info_ast_to_info ia in 
+>                                  ^^^^^^
+> Warning 27 [unused-var-strict]: unused variable l_type.
+$ (cd _build/default && /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/bin/ocamlc.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -warn-error -A -g -bin-annot -I .rat.objs/byte -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/base -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/base/base_internalhash_types -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/base/caml -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/base/shadow_stdlib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/jane-street-headers -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_compare/runtime-lib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_enumerate/runtime-lib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_expect/collector -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_expect/common -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_expect/config -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_expect/config_types -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_hash/runtime-lib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_here/runtime-lib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_inline_test/config -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_inline_test/runtime-lib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_sexp_conv/runtime-lib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/sexplib0 -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/time_now -no-alias-deps -opaque -open Rat -o .rat.objs/byte/rat__Compilateur.cmo -c -impl compilateur.pp.ml)
+$ (cd _build/default && /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/bin/ocamlc.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -warn-error -A -g -bin-annot -I .rat.objs/byte -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/base -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/base/base_internalhash_types -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/base/caml -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/base/shadow_stdlib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/jane-street-headers -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_compare/runtime-lib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_enumerate/runtime-lib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_expect/collector -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_expect/common -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_expect/config -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_expect/config_types -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_hash/runtime-lib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_here/runtime-lib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_inline_test/config -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_inline_test/runtime-lib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_sexp_conv/runtime-lib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/sexplib0 -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/time_now -no-alias-deps -opaque -open Rat -o .rat.objs/byte/rat__TestTDS.cmo -c -impl testTDS.pp.ml)
+$ (cd _build/default && /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/bin/ocamlc.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -warn-error -A -g -bin-annot -I .rat.objs/byte -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/base -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/base/base_internalhash_types -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/base/caml -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/base/shadow_stdlib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/jane-street-headers -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_compare/runtime-lib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_enumerate/runtime-lib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_expect/collector -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_expect/common -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_expect/config -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_expect/config_types -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_hash/runtime-lib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_here/runtime-lib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_inline_test/config -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_inline_test/runtime-lib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_sexp_conv/runtime-lib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/sexplib0 -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/time_now -no-alias-deps -opaque -open Rat -o .rat.objs/byte/rat__TestPlacement.cmo -c -impl testPlacement.pp.ml)
+$ (cd _build/default && /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/bin/ocamlc.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -warn-error -A -g -bin-annot -I .rat.objs/byte -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/base -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/base/base_internalhash_types -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/base/caml -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/base/shadow_stdlib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/jane-street-headers -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_compare/runtime-lib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_enumerate/runtime-lib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_expect/collector -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_expect/common -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_expect/config -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_expect/config_types -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_hash/runtime-lib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_here/runtime-lib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_inline_test/config -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_inline_test/runtime-lib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_sexp_conv/runtime-lib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/sexplib0 -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/time_now -no-alias-deps -opaque -open Rat -o .rat.objs/byte/rat__TestType.cmo -c -impl testType.pp.ml)
 $ (cd _build/default && /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/bin/ocamlopt.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -warn-error -A -g -I .rat.objs/byte -I .rat.objs/native -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/base -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/base/base_internalhash_types -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/base/caml -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/base/shadow_stdlib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/jane-street-headers -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_compare/runtime-lib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_enumerate/runtime-lib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_expect/collector -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_expect/common -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_expect/config -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_expect/config_types -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_hash/runtime-lib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_here/runtime-lib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_inline_test/config -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_inline_test/runtime-lib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_sexp_conv/runtime-lib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/sexplib0 -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/time_now -intf-suffix .ml -no-alias-deps -opaque -open Rat -o .rat.objs/native/rat__PasseCodeRatToTam.cmx -c -impl passeCodeRatToTam.pp.ml)
 > File "passeCodeRatToTam.ml", lines 113-115, characters 2-45:
 > 113 | ..match l1,l2 with 
@@ -252,6 +270,12 @@ $ (cd _build/default && /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12
 > Warning 8 [partial-match]: this pattern-matching is not exhaustive.
 > Here is an example of a case that is not matched:
 > (InfoConst (_, _)|InfoFun (_, _, _))
+> File "passeCodeRatToTam.ml", lines 211-212, characters 5-42:
+> 211 | .....let InfoFun(nom,t_ret,l_type) = info_ast_to_info ia in 
+> 212 |         nom^"\n"^(analyse_bloc t_ret 0 nb)
+> Warning 8 [partial-match]: this pattern-matching is not exhaustive.
+> Here is an example of a case that is not matched:
+> (InfoConst (_, _)|InfoVar (_, _, _, _))
 > File "passeCodeRatToTam.ml", line 4, characters 2-17:
 > 4 |   open Exceptions
 >       ^^^^^^^^^^^^^^^
@@ -272,59 +296,145 @@ $ (cd _build/default && /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12
 > 155 |     let InfoFun(nom,t_ret,l_type) = info_ast_to_info ia in
 >                           ^^^^^
 > Warning 27 [unused-var-strict]: unused variable t_ret.
-> File "passeCodeRatToTam.ml", line 202, characters 26-28:
-> 202 |   let analyser (Programme(lf,bl))=
->                                 ^^
-> Warning 27 [unused-var-strict]: unused variable lf.
+> File "passeCodeRatToTam.ml", line 203, characters 6-10:
+> 203 |   let debu= (getEntete() ) in
+>             ^^^^
+> Warning 26 [unused-var]: unused variable debu.
+> File "passeCodeRatToTam.ml", line 210, characters 22-26:
+> 210 |      let (Fonction(ia,nlpi,nb)) = f in 
+>                             ^^^^
+> Warning 27 [unused-var-strict]: unused variable nlpi.
+> File "passeCodeRatToTam.ml", line 211, characters 27-33:
+> 211 |      let InfoFun(nom,t_ret,l_type) = info_ast_to_info ia in 
+>                                  ^^^^^^
+> Warning 27 [unused-var-strict]: unused variable l_type.
+$ (cd _build/default && /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/bin/ocamlopt.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -warn-error -A -g -I .rat.objs/byte -I .rat.objs/native -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/base -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/base/base_internalhash_types -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/base/caml -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/base/shadow_stdlib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/jane-street-headers -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_compare/runtime-lib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_enumerate/runtime-lib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_expect/collector -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_expect/common -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_expect/config -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_expect/config_types -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_hash/runtime-lib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_here/runtime-lib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_inline_test/config -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_inline_test/runtime-lib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_sexp_conv/runtime-lib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/sexplib0 -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/time_now -intf-suffix .ml -no-alias-deps -opaque -open Rat -o .rat.objs/native/rat__Compilateur.cmx -c -impl compilateur.pp.ml)
+$ (cd _build/default && /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/bin/ocamlc.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -warn-error -A -g -bin-annot -I .rat.objs/byte -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/base -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/base/base_internalhash_types -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/base/caml -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/base/shadow_stdlib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/jane-street-headers -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_compare/runtime-lib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_enumerate/runtime-lib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_expect/collector -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_expect/common -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_expect/config -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_expect/config_types -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_hash/runtime-lib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_here/runtime-lib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_inline_test/config -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_inline_test/runtime-lib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_sexp_conv/runtime-lib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/sexplib0 -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/time_now -no-alias-deps -opaque -open Rat -o .rat.objs/byte/rat__TestTam.cmo -c -impl testTam.pp.ml)
+$ (cd _build/default && /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/bin/ocamlopt.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -warn-error -A -g -I .rat.objs/byte -I .rat.objs/native -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/base -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/base/base_internalhash_types -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/base/caml -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/base/shadow_stdlib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/jane-street-headers -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_compare/runtime-lib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_enumerate/runtime-lib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_expect/collector -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_expect/common -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_expect/config -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_expect/config_types -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_hash/runtime-lib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_here/runtime-lib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_inline_test/config -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_inline_test/runtime-lib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_sexp_conv/runtime-lib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/sexplib0 -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/time_now -intf-suffix .ml -no-alias-deps -opaque -open Rat -o .rat.objs/native/rat__TestPlacement.cmx -c -impl testPlacement.pp.ml)
+$ (cd _build/default && /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/bin/ocamlopt.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -warn-error -A -g -I .rat.objs/byte -I .rat.objs/native -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/base -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/base/base_internalhash_types -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/base/caml -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/base/shadow_stdlib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/jane-street-headers -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_compare/runtime-lib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_enumerate/runtime-lib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_expect/collector -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_expect/common -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_expect/config -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_expect/config_types -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_hash/runtime-lib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_here/runtime-lib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_inline_test/config -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_inline_test/runtime-lib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_sexp_conv/runtime-lib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/sexplib0 -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/time_now -intf-suffix .ml -no-alias-deps -opaque -open Rat -o .rat.objs/native/rat__TestTDS.cmx -c -impl testTDS.pp.ml)
+$ (cd _build/default && /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/bin/ocamlopt.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -warn-error -A -g -I .rat.objs/byte -I .rat.objs/native -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/base -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/base/base_internalhash_types -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/base/caml -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/base/shadow_stdlib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/jane-street-headers -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_compare/runtime-lib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_enumerate/runtime-lib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_expect/collector -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_expect/common -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_expect/config -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_expect/config_types -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_hash/runtime-lib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_here/runtime-lib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_inline_test/config -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_inline_test/runtime-lib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_sexp_conv/runtime-lib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/sexplib0 -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/time_now -intf-suffix .ml -no-alias-deps -opaque -open Rat -o .rat.objs/native/rat__TestType.cmx -c -impl testType.pp.ml)
+$ (cd _build/default && /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/bin/ocamlopt.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -warn-error -A -g -I .rat.objs/byte -I .rat.objs/native -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/base -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/base/base_internalhash_types -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/base/caml -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/base/shadow_stdlib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/jane-street-headers -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_compare/runtime-lib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_enumerate/runtime-lib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_expect/collector -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_expect/common -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_expect/config -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_expect/config_types -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_hash/runtime-lib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_here/runtime-lib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_inline_test/config -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_inline_test/runtime-lib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_sexp_conv/runtime-lib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/sexplib0 -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/time_now -intf-suffix .ml -no-alias-deps -opaque -open Rat -o .rat.objs/native/rat__TestTam.cmx -c -impl testTam.pp.ml)
 $ (cd _build/default && /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/bin/ocamlopt.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -warn-error -A -g -a -o rat.cmxa .rat.objs/native/rat.cmx .rat.objs/native/rat__Type.cmx .rat.objs/native/rat__Tds.cmx .rat.objs/native/rat__Ast.cmx .rat.objs/native/rat__Exceptions.cmx .rat.objs/native/rat__Parser.cmx .rat.objs/native/rat__Lexer.cmx .rat.objs/native/rat__Passe.cmx .rat.objs/native/rat__PasseCodeRatToTam.cmx .rat.objs/native/rat__PassePlacementRat.cmx .rat.objs/native/rat__PasseTdsRat.cmx .rat.objs/native/rat__PasseTypeRat.cmx .rat.objs/native/rat__Compilateur.cmx .rat.objs/native/rat__TestType.cmx .rat.objs/native/rat__TestTam.cmx .rat.objs/native/rat__TestTDS.cmx .rat.objs/native/rat__TestPlacement.cmx .rat.objs/native/rat__PrinterAst.cmx .rat.objs/native/rat__Code.cmx)
+$ (cd _build/default && /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/bin/ocamlc.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -warn-error -A -w -24 -g -g -bin-annot -I .rat.inline-tests/.rat.inline-tests.eobjs/byte -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/base -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/base/base_internalhash_types -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/base/caml -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/base/shadow_stdlib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/jane-street-headers -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_compare/runtime-lib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_enumerate/runtime-lib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_expect/collector -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_expect/common -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_expect/config -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_expect/config_types -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_expect/evaluator -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_expect/matcher -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_hash/runtime-lib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_here/runtime-lib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_inline_test/config -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_inline_test/runner/lib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_inline_test/runtime-lib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_sexp_conv/runtime-lib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppxlib/print_diff -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/re -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/seq -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/sexplib0 -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/stdio -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/time_now -I .rat.objs/byte -no-alias-deps -o .rat.inline-tests/.rat.inline-tests.eobjs/byte/dune__exe__Inline_test_runner_rat.cmo -c -impl .rat.inline-tests/inline_test_runner_rat.ml-gen)
+$ (cd _build/default && /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/bin/ocamlopt.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -warn-error -A -w -24 -g -g -I .rat.inline-tests/.rat.inline-tests.eobjs/byte -I .rat.inline-tests/.rat.inline-tests.eobjs/native -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/base -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/base/base_internalhash_types -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/base/caml -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/base/shadow_stdlib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/jane-street-headers -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_compare/runtime-lib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_enumerate/runtime-lib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_expect/collector -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_expect/common -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_expect/config -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_expect/config_types -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_expect/evaluator -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_expect/matcher -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_hash/runtime-lib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_here/runtime-lib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_inline_test/config -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_inline_test/runner/lib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_inline_test/runtime-lib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_sexp_conv/runtime-lib -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppxlib/print_diff -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/re -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/seq -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/sexplib0 -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/stdio -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/time_now -I .rat.objs/byte -I .rat.objs/native -intf-suffix .ml-gen -no-alias-deps -o .rat.inline-tests/.rat.inline-tests.eobjs/native/dune__exe__Inline_test_runner_rat.cmx -c -impl .rat.inline-tests/inline_test_runner_rat.ml-gen)
 $ (cd _build/default && /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/bin/ocamlopt.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -warn-error -A -w -24 -g -g -o .rat.inline-tests/inline_test_runner_rat.exe /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ocaml/unix.cmxa -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ocaml /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/base/base_internalhash_types/base_internalhash_types.cmxa -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/base/base_internalhash_types /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/base/caml/caml.cmxa /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/sexplib0/sexplib0.cmxa /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/base/shadow_stdlib/shadow_stdlib.cmxa /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/base/base.cmxa -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/base /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_inline_test/config/inline_test_config.cmxa /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/jane-street-headers/jane_street_headers.cmxa /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_sexp_conv/runtime-lib/ppx_sexp_conv_lib.cmxa /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_compare/runtime-lib/ppx_compare_lib.cmxa /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_enumerate/runtime-lib/ppx_enumerate_lib.cmxa /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_hash/runtime-lib/ppx_hash_lib.cmxa /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/time_now/time_now.cmxa -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/time_now /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_inline_test/runtime-lib/ppx_inline_test_lib.cmxa /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_here/runtime-lib/ppx_here_lib.cmxa /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_expect/common/expect_test_common.cmxa /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_expect/config_types/expect_test_config_types.cmxa /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_expect/collector/expect_test_collector.cmxa -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_expect/collector /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_expect/config/expect_test_config.cmxa rat.cmxa /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_inline_test/runner/lib/ppx_inline_test_runner_lib.cmxa -I /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_inline_test/runner/lib /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/stdio/stdio.cmxa /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/re/re.cmxa /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_expect/matcher/expect_test_matcher.cmxa /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppxlib/print_diff/ppxlib_print_diff.cmxa /Users/nouhailaachehboune/.opam/ocaml-base-compiler.4.12.0/lib/ppx_expect/evaluator/ppx_expect_evaluator.cmxa .rat.inline-tests/.rat.inline-tests.eobjs/native/dune__exe__Inline_test_runner_rat.cmx -linkall)
 $ (cd _build/default && .rat.inline-tests/inline_test_runner_rat.exe inline-test-runner rat -source-tree-root . -diff-cmd -)
 $ (cd _build/default && /usr/local/bin/git --no-pager diff --no-index --color=always -u testTam.ml testTam.ml.corrected)
 > diff --git a/testTam.ml b/testTam.ml.corrected
-> index b999178..8256acd 100644
+> index b999178..1d25caa 100644
 > --- a/testTam.ml
 > +++ b/testTam.ml.corrected
-> @@ -80,34 +80,34 @@ let%expect_test "complique" =
+> @@ -24,90 +24,90 @@ let runtam ratfile =
+>  (* requires ppx_expect in jbuild, and `opam install ppx_expect` *)
+>  let%expect_test "testprintint" =
+>    runtam "../../fichiersRat/src-rat-tam-test/testprintint.rat";
+> -  [%expect{| 42 |}]
+> +  [%expect{| Semantic error: asm.SemanticError: Ligne 2 : double déclaration de l'étiquette 'main'. |}]
+>  
+>  let%expect_test "testprintbool" =
+>    runtam "../../fichiersRat/src-rat-tam-test/testprintbool.rat";
+> -  [%expect{| true |}]
+> +  [%expect{| Semantic error: asm.SemanticError: Ligne 2 : double déclaration de l'étiquette 'main'. |}]
+>  
+>  let%expect_test "testprintrat" =
+>     runtam "../../fichiersRat/src-rat-tam-test/testprintrat.rat";
+> -   [%expect{| [4/5] |}]
+> +   [%expect{| Semantic error: asm.SemanticError: Ligne 2 : double déclaration de l'étiquette 'main'. |}]
+>  
+>  let%expect_test "testaddint" =
+>    runtam "../../fichiersRat/src-rat-tam-test/testaddint.rat";
+> -  [%expect{| 42 |}]
+> +  [%expect{| Semantic error: asm.SemanticError: Ligne 2 : double déclaration de l'étiquette 'main'. |}]
+>  
+>  let%expect_test "testaddrat" =
+>    runtam "../../fichiersRat/src-rat-tam-test/testaddrat.rat";
+> -  [%expect{| [7/6] |}]
+> +  [%expect{| Semantic error: asm.SemanticError: Ligne 2 : double déclaration de l'étiquette 'main'. |}]
+>  
+>  let%expect_test "testmultint" =
+>    runtam "../../fichiersRat/src-rat-tam-test/testmultint.rat";
+> -  [%expect{| 440 |}]
+> +  [%expect{| Semantic error: asm.SemanticError: Ligne 2 : double déclaration de l'étiquette 'main'. |}]
+>  
+>  let%expect_test "testmultrat" =
+>    runtam "../../fichiersRat/src-rat-tam-test/testmultrat.rat";
+> -  [%expect{| [14/3] |}]
+> +  [%expect{| Semantic error: asm.SemanticError: Ligne 2 : double déclaration de l'étiquette 'main'. |}]
+>  
+>  let%expect_test "testnum" =
+>    runtam "../../fichiersRat/src-rat-tam-test/testnum.rat";
+> -  [%expect{| 4 |}]
+> +  [%expect{| Semantic error: asm.SemanticError: Ligne 2 : double déclaration de l'étiquette 'main'. |}]
+>  
+>  let%expect_test "testdenom" =
+>    runtam "../../fichiersRat/src-rat-tam-test/testdenom.rat";
+> -  [%expect{| 7 |}]
+> +  [%expect{| Semantic error: asm.SemanticError: Ligne 2 : double déclaration de l'étiquette 'main'. |}]
+>  
+>  let%expect_test "testwhile1" =
+>    runtam "../../fichiersRat/src-rat-tam-test/testwhile1.rat";
+> -  [%expect{| 19 |}]
+> +  [%expect{| Semantic error: asm.SemanticError: Ligne 2 : double déclaration de l'étiquette 'main'. |}]
+>  
+>  let%expect_test "testif1" =
+>    runtam "../../fichiersRat/src-rat-tam-test/testif1.rat";
+> -  [%expect{| 18 |}]
+> +  [%expect{| Semantic error: asm.SemanticError: Ligne 2 : double déclaration de l'étiquette 'main'. |}]
+>  
+>  let%expect_test "testif2" =
+>    runtam "../../fichiersRat/src-rat-tam-test/testif2.rat";
+> -  [%expect{| 21 |}]
+> +  [%expect{| Semantic error: asm.SemanticError: Ligne 2 : double déclaration de l'étiquette 'main'. |}]
+>  
+>  let%expect_test "factiter" =
+>    runtam "../../fichiersRat/src-rat-tam-test/factiter.rat";
+> -  [%expect{| 120 |}]
+> +  [%expect{| Semantic error: asm.SemanticError: Ligne 2 : double déclaration de l'étiquette 'main'. |}]
+>  
+>  let%expect_test "complique" =
+>    runtam "../../fichiersRat/src-rat-tam-test/complique.rat";
+> -  [%expect{| [9/4][27/14][27/16][3/2] |}]
+> +  [%expect{| Semantic error: asm.SemanticError: Ligne 2 : double déclaration de l'étiquette 'main'. |}]
 >  
 >  let%expect_test "factfun1" =
 >    runtam "../../fichiersRat/src-rat-tam-test/testfun1.rat";
 > -  [%expect{| 1 |}]
-> +  [%expect{| Semantic error: asm.SemanticError: L'étiquette 'f' n'est pas définie. |}]
+> +  [%expect{| Semantic error: asm.SemanticError: Ligne 6 : double déclaration de l'étiquette 'main'. |}]
 >  
 >  let%expect_test "factfun2" =
 >    runtam "../../fichiersRat/src-rat-tam-test/testfun2.rat";
 > -  [%expect{| 7 |}]
-> +  [%expect{| Semantic error: asm.SemanticError: L'étiquette 'f' n'est pas définie. |}]
+> +  [%expect{| Semantic error: asm.SemanticError: Ligne 6 : double déclaration de l'étiquette 'main'. |}]
 >  
 >  let%expect_test "factfun3" =
 >    runtam "../../fichiersRat/src-rat-tam-test/testfun3.rat";
 > -  [%expect{| 10 |}]
-> +  [%expect{| Semantic error: asm.SemanticError: L'étiquette 'f' n'est pas définie. |}]
+> +  [%expect{| Semantic error: asm.SemanticError: Ligne 8 : double déclaration de l'étiquette 'main'. |}]
 >  
 >  let%expect_test "factfun4" =
 >    runtam "../../fichiersRat/src-rat-tam-test/testfun4.rat";
 > -  [%expect{| 10 |}]
-> +  [%expect{| Semantic error: asm.SemanticError: L'étiquette 'f' n'est pas définie. |}]
+> +  [%expect{| Semantic error: asm.SemanticError: Ligne 8 : double déclaration de l'étiquette 'main'. |}]
 >  
 >  let%expect_test "factfun5" =
 >    runtam "../../fichiersRat/src-rat-tam-test/testfun5.rat";
 > -  [%expect{| |}]
-> +  [%expect{| Semantic error: asm.SemanticError: L'étiquette 'f1' n'est pas définie. |}]
+> +  [%expect{| Semantic error: asm.SemanticError: Ligne 7 : double déclaration de l'étiquette 'main'. |}]
 >  
 >  let%expect_test "factfun6" =
 >    runtam "../../fichiersRat/src-rat-tam-test/testfun6.rat";
 > -  [%expect{|truetrue|}]
-> +  [%expect{|Semantic error: asm.SemanticError: L'étiquette 'veriftranspose' n'est pas définie.|}]
+> +  [%expect{|Semantic error: asm.SemanticError: Ligne 78 : double déclaration de l'étiquette 'main'.|}]
 >  
 >  let%expect_test "factfuns" =
 >    runtam "../../fichiersRat/src-rat-tam-test/testfuns.rat";
 > -  [%expect{| 28 |}]
-> +  [%expect{| Semantic error: asm.SemanticError: L'étiquette 'f1' n'est pas définie. |}]
+> +  [%expect{| Semantic error: asm.SemanticError: Ligne 43 : double déclaration de l'étiquette 'main'. |}]
 >  
 >  let%expect_test "factrec" =
 >    runtam "../../fichiersRat/src-rat-tam-test/factrec.rat";
 > -  [%expect{| 120 |}]
-> +  [%expect{| Semantic error: asm.SemanticError: L'étiquette 'fact' n'est pas définie. |}]
+> +  [%expect{| Semantic error: asm.SemanticError: Ligne 28 : double déclaration de l'étiquette 'main'. |}]
 >  
 >  
 [1]
