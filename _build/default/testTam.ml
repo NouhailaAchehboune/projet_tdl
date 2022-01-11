@@ -96,7 +96,7 @@ let%expect_test "factfun4" =
 
 let%expect_test "factfun5" =
   runtam "../../fichiersRat/src-rat-tam-test/testfun5.rat";
-  [%expect{| |}]
+  [%expect{| 0 |}]
 
 let%expect_test "factfun6" =
   runtam "../../fichiersRat/src-rat-tam-test/testfun6.rat";

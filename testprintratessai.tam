@@ -1,7 +1,6 @@
-; /Users/nouhailaachehboune/Desktop/ENSEEIHT/prog_fonct/Projet/fichiersRat/src-rat-tam-test/testprintrat.rat
-Jump main 
-LOADL 4
-LOADL 5
-CALL (SB) ROut 
-POP (0) 0
-HALT 
+
+main{
+int i = 3;
+i += 4; print i;
+rat r = [4/5]; r += [1/8]; print r;
+}

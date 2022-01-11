@@ -54,6 +54,8 @@ and instruction =
   | TantQue of expression * bloc
   (* return d'une fonction *)
   | Retour of expression
+  (* Ajout à une variable représentée par son nom une valeur *)
+  | Ajout of string * expression
 
 (* Structure des fonctions de Rat *)
 (* type de retour - nom - liste des paramètres (association type et nom) - corps de la fonction *)
@@ -82,7 +84,7 @@ struct
     | Entier of int
     | Unaire of AstSyntax.unaire * expression
     | Binaire of AstSyntax.binaire * expression * expression
-
+  
   (* instructions existantes dans notre langage *)
   (* ~ instruction de l'AST syntaxique où les noms des identifiants ont été
   remplacés par les informations associées aux identificateurs
@@ -96,7 +98,7 @@ struct
     | TantQue of expression * bloc
     | Retour of expression
     | Empty (* les nœuds ayant disparus: Const *)
-
+    | Ajout of  Tds.info_ast * expression
 
   (* Structure des fonctions dans notre langage *)
   (* type de retour - informations associées à l'identificateur (dont son nom) - liste des paramètres (association type et information sur les paramètres) - corps de la fonction *)
@@ -137,6 +139,8 @@ type bloc = instruction list
  and instruction =
   | Declaration of Tds.info_ast * expression
   | Affectation of Tds.info_ast * expression
+  | AjoutInt of Tds.info_ast * expression
+  | AjoutRat of Tds.info_ast * expression
   | AffichageInt of expression
   | AffichageRat of expression
   | AffichageBool of expression

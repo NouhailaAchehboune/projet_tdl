@@ -31,7 +31,7 @@ STORE (1) 3[LB]
 LOAD (1) 5[LB]
 STORE (1) 4[LB]
 LOAD (1) 3[LB]
-STORE(1) 5[LB]
+STORE (1) 5[LB]
 JUMP boucle
 fin
 LOAD (1) 4[LB]
@@ -142,9 +142,6 @@ let rec fusion l1 l2=
     let ta = (Type.getTaille t) in 
         "LOAD ("^(string_of_int ta)^") "^string_of_int add^"["^reg^"] \n"
     |AstType.Entier(i) -> 
-     if (i=Null) then 
-      "" 
-     else 
     "LOADL "^(string_of_int i)^"\n"
     |AstType.Unaire(u,e1) -> let code1=analyse_expression (e1,Rat) in
     let code2=analyse_unaire(u) in
@@ -169,12 +166,17 @@ let rec fusion l1 l2=
   |AstType.Affectation(ia,e) -> let InfoVar(_,t,add,reg) = info_ast_to_info ia in
     let codee=analyse_expression (e,t) in
     let taille=string_of_int (getTaille t) in
-    (codee^"STORE ("^taille^") "^(string_of_int add)^"["^reg^"] \n",0)
+      (codee^"STORE ("^taille^") "^(string_of_int add)^"["^reg^"] \n",0)
   |AstType.AffichageInt(e) -> let codee=analyse_expression (e,Int) in
     (codee^"SUBR IOut \n",0)
   |AstType.AffichageRat(e) -> let codee=analyse_expression (e,Rat) in
     (codee^"CALL (SB) ROut \n",0)
-  
+  |AstType.AjoutInt(ia,e) -> let InfoVar(_,_,add,reg) = info_ast_to_info ia in
+    let codee=analyse_expression (e,Int) in
+        ("LOAD (1) "^string_of_int add^"["^reg^"] \n"^codee^"SUBR IAdd \n"^"STORE (1) "^(string_of_int add)^"["^reg^"] \n",0)
+  |AstType.AjoutRat(ia,e) -> let InfoVar(_,_,add,reg) = info_ast_to_info ia in
+    let codee=analyse_expression (e,Rat) in
+        ("LOAD (2) "^string_of_int add^"["^reg^"] \n"^codee^"CALL (SB) RAdd \n"^"STORE (2) "^(string_of_int add)^"["^reg^"] \n",0)
   |AstType.AffichageBool(e) -> let codee=analyse_expression (e,Bool) in
     (codee^"SUBR BOut \n",0)
   |AstType.Conditionnelle(e,bt,be) ->

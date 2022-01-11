@@ -10,6 +10,7 @@ type token =
   | PV
   | PRINT
   | PO
+  | PLUSEQ
   | PLUS
   | PF
   | NUM

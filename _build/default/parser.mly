@@ -36,6 +36,7 @@ open Ast.AstSyntax
 %token MULT
 %token INF
 %token EOF
+%token PLUSEQ
 
 (* Type de l'attribut synthétisé des non-terminaux *)
 %type <programme> prog
@@ -69,6 +70,7 @@ is :
 
 i :
 | t=typ n=ID EQUAL e1=e PV          {Declaration (t,n,e1)}
+| n=ID PLUSEQ e1=e PV               {Ajout (n,e1)}
 | n=ID EQUAL e1=e PV                {Affectation (n,e1)}
 | CONST n=ID EQUAL e=ENTIER PV      {Constante (n,e)}
 | PRINT e1=e PV                     {Affichage (e1)}
