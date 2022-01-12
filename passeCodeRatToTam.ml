@@ -134,13 +134,27 @@ let rec fusion l1 l2=
     |AstType.Inf->("SUBR ILss \n",Int)
     |AstType.Fraction-> ("",Int)
 
+  let analyse_affectable (a,t)=
+    match a with
+    |AstType.Ident(ia)-> begin 
+                          match info_ast_to_info ia with 
+                          |InfoVar(_,_,add,reg) -> let ta = (Type.getTaille t) in 
+                                                    "LOAD ("^(string_of_int ta)^") "^string_of_int add^"["^reg^"] \n"
+                          |InfoConst(_,i)-> "LOADL "^(string_of_int i)^" \n"
+                          |_ -> failwith ""
+                        end
+
+  let analyse_affectable_gauche a=
+    match a with
+    |AstType.Ident(ia)-> let InfoVar(_,t,add,reg) = info_ast_to_info ia in
+        ("LOADA "^string_of_int add^"["^reg^"] \n",t)
+
   let rec analyse_expression (e,t) =
     match e with
     |AstType.Booleen(b) ->
         if b then "LOADL 1 \n" else "LOADL 0 \n"
-    |AstType.Ident(ia)-> let InfoVar(_,_,add,reg) = info_ast_to_info ia in
-    let ta = (Type.getTaille t) in 
-        "LOAD ("^(string_of_int ta)^") "^string_of_int add^"["^reg^"] \n"
+    |AstType.Affectable(a)-> let codea=analyse_affectable (a,t) in
+        codea
     |AstType.Entier(i) -> 
     "LOADL "^(string_of_int i)^"\n"
     |AstType.Unaire(u,e1) -> let code1=analyse_expression (e1,Rat) in
@@ -163,10 +177,10 @@ let rec fusion l1 l2=
     let codee=analyse_expression (e,t) in
     let taille=string_of_int (getTaille t) in
     ("PUSH "^taille^" \n"^codee^"STORE ("^taille^") "^(string_of_int add)^"["^reg^"] \n",(getTaille t))
-  |AstType.Affectation(ia,e) -> let InfoVar(_,t,add,reg) = info_ast_to_info ia in
+  |AstType.Affectation(a,e) -> let (codea,t) = analyse_affectable_gauche a in
     let codee=analyse_expression (e,t) in
     let taille=string_of_int (getTaille t) in
-    (codee^"STORE ("^taille^") "^(string_of_int add)^"["^reg^"] \n",0)
+    (codee^codea^"STOREI ("^taille^") \n",0)
   |AstType.AffichageInt(e) -> let codee=analyse_expression (e,Int) in
     (codee^"SUBR IOut \n",0)
   |AstType.AffichageRat(e) -> let codee=analyse_expression (e,Rat) in
@@ -211,6 +225,6 @@ let rec fusion l1 l2=
      let InfoFun(nom,t_ret,l_type) = info_ast_to_info ia in
      let listtaille = List.map getTaille l_type in 
      let taille = List.fold_left (fun x y -> x+y) 0 listtaille in 
-        nom^"\n"^(analyse_bloc t_ret (taille) nb)^"RETURN (0) "^string_of_int (taille)^"\n \n"
+        nom^"\n"^(analyse_bloc t_ret (taille) nb)^"HALT"^"\n \n"
    
 end

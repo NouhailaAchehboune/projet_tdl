@@ -11,13 +11,16 @@ struct
   type t2 = Ast.AstType.programme
 
   let get_type_retour ia =
-  let InfoFun(n, tr, ltp) = info_ast_to_info ia in tr
+  let InfoFun(_, tr,_) = info_ast_to_info ia in tr
 
   let get_type ia =
-  let InfoVar(n,t,_,_) = info_ast_to_info ia in t
+    match info_ast_to_info ia with
+    | InfoVar(_,t,_,_) ->  t
+    | InfoConst _ -> Int
+    | _ -> failwith ""
 
   let get_type_param ia =
-  let InfoFun(n, tr, ltp) = info_ast_to_info ia in ltp
+  let InfoFun(_, _, ltp) = info_ast_to_info ia in ltp
  
   let analyse_type_unaire u = 
     if (u=AstSyntax.Numerateur) then Numerateur
@@ -40,6 +43,12 @@ struct
              else (raise (TypeBinaireInattendu (AstSyntax.Inf, t1, t2)))
 
   
+  let rec analyse_type_affectable a=
+    match a with
+    |AstTds.Ident(ia) ->
+    (AstType.Ident(ia), get_type ia)
+
+  
   let rec analyse_type_expression e = 
   match e with 
   |AstTds.AppelFonction(ia, le) -> 
@@ -51,9 +60,8 @@ struct
     if (est_compatible_list tparam nlp) then
     (AppelFonction(ia, nle), tr) else
     (raise (TypesParametresInattendus (tparam, nlp)))
-  |AstTds.Ident(ia) ->
-    (AstType.Ident(ia), get_type ia)
-  
+  |AstTds.Affectable(a) ->let (na,type_na)=analyse_type_affectable a in
+      (AstType.Affectable(na),type_na)
   |AstTds.Booleen(b) ->
     (AstType.Booleen(b), Bool)
   |AstTds.Entier(n) ->
@@ -93,11 +101,11 @@ let rec analyse_type_instruction tf i =
       AstType.Declaration(ia, ne) 
       end
     else (raise (TypeInattendu (te,t)))
-  |AstTds.Affectation(ia, e) -> let t = (get_type ia) in 
+  |AstTds.Affectation(a, e) -> let (na,ta) = (analyse_type_affectable a) in 
                          let (ne,te) = (analyse_type_expression e) in
-                         if (est_compatible te t) then 
-                          AstType.Affectation(ia, ne)
-                         else (raise (TypeInattendu (te,t)))
+                         if (est_compatible te ta) then 
+                          AstType.Affectation(na, ne)
+                         else (raise (TypeInattendu (te,ta)))
   |AstTds.Affichage(e) -> let (ne, te) = (analyse_type_expression e) in
                    begin
                    match te with                  
