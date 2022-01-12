@@ -103,9 +103,23 @@ let rec analyse_type_instruction tf i =
     else (raise (TypeInattendu (te,t)))
   |AstTds.Affectation(a, e) -> let (na,ta) = (analyse_type_affectable a) in 
                          let (ne,te) = (analyse_type_expression e) in
+<<<<<<< HEAD
                          if (est_compatible te ta) then 
                           AstType.Affectation(na, ne)
                          else (raise (TypeInattendu (te,ta)))
+=======
+                         if (est_compatible te t) then 
+                          AstType.Affectation(ia, ne)
+                         else (raise (TypeInattendu (te,t)))
+  |AstTds.Ajout(ia, e) -> let t = (get_type ia) in 
+                         let (ne,te) = (analyse_type_expression e) in
+                         if (est_compatible te t) then 
+                           if (analyse_type_binaire Plus te t = PlusInt) then
+                            AstType.AjoutInt(ia, ne)
+                           else 
+                            AstType.AjoutRat(ia, ne)
+                         else (raise (TypeInattendu (te,t)))
+>>>>>>> 0adde7004007642b40f31cf7d61b78170ac1b82a
   |AstTds.Affichage(e) -> let (ne, te) = (analyse_type_expression e) in
                    begin
                    match te with                  

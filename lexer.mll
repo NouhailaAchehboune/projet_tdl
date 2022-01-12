@@ -53,6 +53,7 @@ rule token = parse
 | "}"          { AF }
 | "("          { PO }
 | ")"          { PF }
+| "+="          { PLUSEQ }
 | "="          { EQUAL }
 | "["          { CO }
 | "]"          { CF }
