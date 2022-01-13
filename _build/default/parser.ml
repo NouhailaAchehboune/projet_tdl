@@ -128,7 +128,7 @@ let rec _menhir_run49 : _menhir_env -> ('ttv_tail * _menhir_state) * _menhir_sta
             ))) = _menhir_stack in
             let _v : (Ast.AstSyntax.affectable) = 
 # 90 "parser.mly"
-                        (ENR (a1,n))
+                        (Acces (a1,n))
 # 133 "parser.ml"
              in
             _menhir_goto_a _menhir_env _menhir_stack _menhir_s _v
@@ -611,7 +611,7 @@ and _menhir_goto_dp : _menhir_env -> 'ttv_tail -> _menhir_state -> ((Type.typ * 
             let ((_menhir_stack, _menhir_s), _, (le : ((Type.typ * string) list))) = _menhir_stack in
             let _v : (Type.typ) = 
 # 97 "parser.mly"
-                           (ENRE le )
+                           (Enre le )
 # 616 "parser.ml"
              in
             _menhir_goto_typ _menhir_env _menhir_stack _menhir_s _v

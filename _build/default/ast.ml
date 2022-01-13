@@ -30,7 +30,7 @@ type affectable =
   (*Accés à une valeur representé par un pointeur sur lui meme *)
   | Deref of affectable
   (*accès à un champ de l’enregistrement*)
-  | ENR of affectable*string
+  | Acces of affectable * string
 
 (* Expressions de Rat *)
 type expression =
@@ -53,7 +53,7 @@ type expression =
   (* Adresse de l'id *)
   | Adresse of string
   (*création d’un enregistrement avec la liste des valeurs de ses champs*)
-  |Creation of expression list
+  | Creation of expression list
 
 (* Instructions de Rat *)
 type bloc = instruction list
@@ -96,7 +96,7 @@ struct
   type affectable =
     | Ident of Tds.info_ast (* le nom de l'identifiant est remplacé par ses informations *)
     | Deref of affectable
-    | ENR of affectable*Tds.info_ast (* le nom de l'identifiant est remplacé par ses informations *)
+    | Acces of affectable * Tds.info_ast (* le nom de l'identifiant est remplacé par ses informations *)
 
   (* Expressions existantes dans notre langage *)
   (* ~ expression de l'AST syntaxique où les noms des identifiants ont été
@@ -111,7 +111,7 @@ struct
     | Null
     | New of typ
     | Adresse of Tds.info_ast (* le nom de l'identifiant est remplacé par ses informations *)
-    |Creation of expression list
+    | Creation of expression list
  
   (* instructions existantes dans notre langage *)
   (* ~ instruction de l'AST syntaxique où les noms des identifiants ont été
@@ -154,6 +154,7 @@ type binaire = Fraction | PlusInt | PlusRat | MultInt | MultRat | EquInt | EquBo
 type affectable =
     | Ident of Tds.info_ast 
     | Deref of affectable
+    | Acces of affectable * Tds.info_ast
 
 (* Expressions existantes dans Rat *)
 (* = expression de AstTds *)
@@ -167,7 +168,8 @@ type expression =
   | Null
   | New of typ
   | Adresse of Tds.info_ast 
-
+  | Creation of expression list
+  
 (* instructions existantes Rat *)
 (* = instruction de AstTds + informations associées aux identificateurs, mises à jour *)
 (* + résolution de la surcharge de l'affichage *)

@@ -31,6 +31,7 @@
         "false",   FALSE;
         "return",  RETURN;
         "null",    NULL;
+        "struct",    STRUCT;
         "new",     NEW
       ];
     fun id ->

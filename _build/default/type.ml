@@ -1,4 +1,4 @@
-type typ = Bool | Int | Rat | Undefined | Pointeur of typ | ENRE of (typ*string) list
+type typ = Bool | Int | Rat | Undefined | Pointeur of typ | Enre of (typ*string) list
 
 let rec string_of_type t = 
   match t with
@@ -7,8 +7,8 @@ let rec string_of_type t =
   | Rat  ->  "Rat"
   | Undefined -> "Undefined"
   | Pointeur(t) -> (string_of_type t)^"*"
-  | ENRE ((a,b)::q) ->"("^(string_of_type a)^", "^b^")"^ (string_of_type (ENRE q))
-  | _ ->" "
+  | Enre ((a,b)::q) ->"("^(string_of_type a)^", "^b^")"^ (string_of_type (Enre q))
+  | Enre([]) ->" "
 let rec est_compatible t1 t2 =
   match t1, t2 with
   | Bool, Bool -> true
@@ -16,11 +16,11 @@ let rec est_compatible t1 t2 =
   | Rat, Rat -> true 
   | Pointeur(tt1), Pointeur(tt2) -> if (est_compatible tt1 tt2) then true
                                       else false
-  | ENRE((a,b)::q), ENRE((c,d)::p)-> if ((est_compatible a c)&&(b=d)) then 
+  | Enre((a,b)::q), Enre((c,d)::p)-> if ((est_compatible a c)&&(b=d)) then 
                                        if p=[]&& q=[] then 
                                         true
                                        else
-                                       (est_compatible (ENRE p) (ENRE q))
+                                       (est_compatible (Enre p) (Enre q))
                                     else false                                
   | _ -> false 
 
@@ -61,7 +61,7 @@ let rec getTaille t =
   | Rat -> 2
   | Undefined -> 0
   | Pointeur _ -> 1
-  | ENRE p -> let list_taille = (List.map  (fun (a,b) -> 1+getTaille(a)) p) in 
+  | Enre p -> let list_taille = (List.map  (fun (a,_) -> getTaille(a)) p) in 
                List.fold_left (fun a b -> a+b) 0 list_taille
   
 let%test _ = getTaille Int = 1

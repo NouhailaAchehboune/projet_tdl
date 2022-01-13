@@ -87,14 +87,14 @@ i :
 a :
 | n=ID                    {Ident n}
 |PO MULT a1=a PF          {Deref a1}
-|PO a1=a POINT n=ID PF  {ENR (a1,n)}
+|PO a1=a POINT n=ID PF  {Acces (a1,n)}
 
 dp :
 |                         {[]}
 | t=typ n=ID lp=dp        {(t,n)::lp}
 
 typ :
-| STRUCT  AO le = dp AF    {ENRE le }
+| STRUCT  AO le = dp AF    {Enre le }
 | BOOL    {Bool}
 | INT     {Int}
 | RAT     {Rat}

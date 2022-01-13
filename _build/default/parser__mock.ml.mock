@@ -143,7 +143,7 @@ and (xv_typ, xv_prog, xv_main, xv_is, xv_i, xv_fonc, xv_e, xv_dp, xv_cp, xv_bloc
    : unit) (_startpos__1_ : Lexing.position) (_endpos__1_ : Lexing.position) (_startofs__1_ : int) (_endofs__1_ : int) (_loc__1_ : Lexing.position * Lexing.position) ->
     ((
 # 97 "parser.mly"
-                           (ENRE le )
+                           (Enre le )
 # 148 "parser__mock.ml.mock"
      : 'tv_typ) : (
 # 52 "parser.mly"
@@ -1181,7 +1181,7 @@ and (xv_typ, xv_prog, xv_main, xv_is, xv_i, xv_fonc, xv_e, xv_dp, xv_cp, xv_bloc
    : unit) (_startpos__1_ : Lexing.position) (_endpos__1_ : Lexing.position) (_startofs__1_ : int) (_endofs__1_ : int) (_loc__1_ : Lexing.position * Lexing.position) ->
     ((
 # 90 "parser.mly"
-                        (ENR (a1,n))
+                        (Acces (a1,n))
 # 1186 "parser__mock.ml.mock"
      : 'tv_a) : (
 # 56 "parser.mly"

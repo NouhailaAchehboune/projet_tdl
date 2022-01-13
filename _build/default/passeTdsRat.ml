@@ -13,6 +13,7 @@ struct
 (* analyse_tds_affectable : AstSyntax.affectable -> AstTds.affectable *)
 (* Paramètre tds : la table des symboles courante *)
 (* Paramètre a : l'affectable à analyser *)
+(* Paramètre modif : True si le paramètre est à gauche et False s'il est à droite *)
 (* Vérifie la bonne utilisation des identifiants et tranforme l'affectable
 en un affectable de type AstTds.affectable *)
 (* Erreur si mauvaise utilisation des identifiants *)
@@ -38,22 +39,20 @@ let rec analyse_tds_affectable tds modif a=
     end
   |AstSyntax.Deref(a1) -> let na = analyse_tds_affectable tds modif a1 in
       AstTds.Deref(na)
-  |AstSyntax.ENR (a1,n) ->  
-      begin 
-        match chercherLocalement tds n with 
-         |None -> raise (IdentifiantNonDeclare n)
-         | Some ia -> let nb = analyse_tds_affectable tds modif a1 in
-                      let i= info_ast_to_info ia in 
+  |AstSyntax.Acces (a1,n) -> let nb = analyse_tds_affectable tds modif a1 in 
+        begin
+    match chercherGlobalement tds n with     
+    | None -> (* L'identifiant n'est pas trouvé dans la tds globale. *) 
+          raise (IdentifiantNonDeclare n)
+    | Some ia ->(* L'identifiant est trouvé dans la tds globale, 
+          il a donc déjà été déclaré. L'information associée est récupérée. *)  
+          let i= info_ast_to_info ia in 
                  begin
                  match i with 
-                 |InfoFun(_,_,_) -> raise (MauvaiseUtilisationIdentifiant n)
-                 |InfoVar(_,_,_,_)-> AstTds.ENR(nb,ia)
-                 |InfoConst _ -> if modif then
-                                             raise(MauvaiseUtilisationIdentifiant n) 
-                                        else 
-                                            AstTds.ENR(nb,ia)
+                 |InfoVar(_,_,_,_)-> AstTds.Acces(nb,ia) 
+                 |_ -> raise (MauvaiseUtilisationIdentifiant n)
                  end
-      end
+        end
 (* analyse_tds_expression : AstSyntax.expression -> AstTds.expression *)
 (* Paramètre tds : la table des symboles courante *)
 (* Paramètre e : l'expression à analyser *)
@@ -67,13 +66,13 @@ let rec analyse_tds_expression tds e =
     match chercherGlobalement tds id with 
     | None -> raise (IdentifiantNonDeclare id)
     | Some ia -> 
-    begin
+        begin
                 match (info_ast_to_info ia) with 
                 | InfoFun(_,_,_) ->
                 let nle = (List.map (analyse_tds_expression tds) le) in 
                  AstTds.AppelFonction(ia, nle)
                 | _ -> raise  (MauvaiseUtilisationIdentifiant id)
-    end
+        end
     end
   | AstSyntax.Affectable(a) -> let na = analyse_tds_affectable tds false a in
                           Affectable(na)
@@ -131,7 +130,7 @@ let rec analyse_tds_instruction tds i =
   | AstSyntax.Affectation (a,e) ->let na = analyse_tds_affectable tds true a in
                               let ne = analyse_tds_expression tds e in 
                               Affectation(na,ne)
-  |AstSyntax.Ajout(n,e) -> begin
+  | AstSyntax.Ajout(n,e) -> begin
         match chercherGlobalement tds n with
         | None -> 
           (* L'identifiant n'est pas trouvé dans la tds globale. *) 
