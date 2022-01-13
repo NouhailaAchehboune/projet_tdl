@@ -38,7 +38,22 @@ let rec analyse_tds_affectable tds modif a=
     end
   |AstSyntax.Deref(a1) -> let na = analyse_tds_affectable tds modif a1 in
       AstTds.Deref(na)
-
+  |AstSyntax.ENR (a1,n) ->  
+      begin 
+        match chercherLocalement tds n with 
+         |None -> raise (IdentifiantNonDeclare n)
+         | Some ia -> let nb = analyse_tds_affectable tds modif a1 in
+                      let i= info_ast_to_info ia in 
+                 begin
+                 match i with 
+                 |InfoFun(_,_,_) -> raise (MauvaiseUtilisationIdentifiant n)
+                 |InfoVar(_,_,_,_)-> AstTds.ENR(nb,ia)
+                 |InfoConst _ -> if modif then
+                                             raise(MauvaiseUtilisationIdentifiant n) 
+                                        else 
+                                            AstTds.ENR(nb,ia)
+                 end
+      end
 (* analyse_tds_expression : AstSyntax.expression -> AstTds.expression *)
 (* Paramètre tds : la table des symboles courante *)
 (* Paramètre e : l'expression à analyser *)
@@ -52,13 +67,13 @@ let rec analyse_tds_expression tds e =
     match chercherGlobalement tds id with 
     | None -> raise (IdentifiantNonDeclare id)
     | Some ia -> 
-    begin
+        begin
                 match (info_ast_to_info ia) with 
                 | InfoFun(_,_,_) ->
                 let nle = (List.map (analyse_tds_expression tds) le) in 
                  AstTds.AppelFonction(ia, nle)
                 | _ -> raise  (MauvaiseUtilisationIdentifiant id)
-    end
+        end
     end
   | AstSyntax.Affectable(a) -> let na = analyse_tds_affectable tds false a in
                           Affectable(na)
@@ -80,7 +95,8 @@ let rec analyse_tds_expression tds e =
                                       |_ -> raise  (MauvaiseUtilisationIdentifiant n)
                            end
                           end
-                   
+  |AstSyntax.Creation(le) -> let nle = (List.map (analyse_tds_expression tds) le ) in 
+                               AstTds.Creation(nle)              
 (* analyse_tds_instruction : AstSyntax.instruction -> tds -> AstTds.instruction *)
 (* Paramètre tds : la table des symboles courante *)
 (* Paramètre i : l'instruction à analyser *)
