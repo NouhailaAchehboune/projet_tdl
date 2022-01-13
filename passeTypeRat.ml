@@ -42,7 +42,12 @@ struct
     |AstSyntax.Inf -> if (est_compatible Int t1) then Inf
              else (raise (TypeBinaireInattendu (AstSyntax.Inf, t1, t2)))
 
-  
+  let rec recherche liste id = 
+    match liste with 
+    |(t,nom)::q -> if (nom=id) then t
+                  else recherche q id
+    |_ -> raise (TypeEnregistrementIncompatible id)          
+
   let rec analyse_type_affectable a=
     match a with
     |AstTds.Ident(ia) -> (AstType.Ident(ia), get_type ia)
@@ -52,7 +57,14 @@ struct
                         |Pointeur(t)-> (AstType.Deref(na),t)
                         |_ -> (raise (PasUnPointeur (ta)))
                         end
-
+    |AstTds.Acces (a1,ia) -> let (a, ta) = analyse_type_affectable a1 in
+          let InfoVar(nom,_,_,_) = info_ast_to_info ia in 
+         begin 
+          match ta with 
+         | Enre(le) ->  let te = (recherche le nom) in 
+                      (AstType.Acces(a,ia),te)
+          | _ -> raise (PasUnEnregistrement ta) 
+         end   
 
   
   let rec analyse_type_expression e = 
@@ -103,7 +115,9 @@ struct
     (*  Le cas suivant ne devrait jamais avoir lieu car verifié à la passe précédente *)
                             |_ -> failwith ""
                             end
-
+    | AstTds.Creation(le) -> let nlt = (List.map analyse_type_expression le) in 
+                             let nle = (List.map (fun (exp,t)-> exp) nlt) in 
+                              (AstTds.Creation(nlt),
 
 let maj_type t ia = (modifier_type_info t ia)
 
