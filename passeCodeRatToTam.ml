@@ -5,6 +5,7 @@ struct
   open Ast
   open AstPlacement
   open Tds
+  open Code
 
   type t1 = Ast.AstPlacement.programme
   type t2 = string
@@ -109,6 +110,7 @@ let ecrireFichier nom texte =
   let fich = open_out nom in
   output_string fich texte ;
   close_out fich
+
 let rec fusion l1 l2=
   match l1,l2 with 
   | [],[] -> [] 
@@ -134,20 +136,23 @@ let rec fusion l1 l2=
     |AstType.Inf->("SUBR ILss \n",Int)
     |AstType.Fraction-> ("",Int)
 
-  let analyse_affectable (a,t)=
+  let rec analyse_affectable (a,t)=
     match a with
     |AstType.Ident(ia)-> begin 
                           match info_ast_to_info ia with 
-                          |InfoVar(_,_,add,reg) -> let ta = (Type.getTaille t) in 
+                          |InfoVar(_,_,add,reg) -> let ta = (getTaille t) in 
                                                     "LOAD ("^(string_of_int ta)^") "^string_of_int add^"["^reg^"] \n"
                           |InfoConst(_,i)-> "LOADL "^(string_of_int i)^" \n"
                           |_ -> failwith ""
                         end
+    |AstType.Deref(a1) -> let na= analyse_affectable (a1,t) in
+                          na^"LOADI ("^(string_of_int(getTaille t))^") \n"
 
-  let analyse_affectable_gauche a=
+  let rec analyse_affectable_gauche a=
     match a with
     |AstType.Ident(ia)-> let InfoVar(_,t,add,reg) = info_ast_to_info ia in
         ("LOADA "^string_of_int add^"["^reg^"] \n",t)
+    |AstType.Deref(a1) -> analyse_affectable_gauche a1
 
   let rec analyse_expression (e,t) =
     match e with
@@ -166,10 +171,18 @@ let rec fusion l1 l2=
       let code2=analyse_expression(e2,t1) in
       code1^code2^codeb
    |AstType.AppelFonction(ia,la) ->
-    let InfoFun(nom,t_ret,l_type) = info_ast_to_info ia in
-    let lst= (List.map analyse_expression (fusion la l_type)) in
-    let nla =(List.fold_right (fun x y -> x^y) lst "") in
-    nla^"CALL (SB) "^nom^"\n" 
+      let InfoFun(nom,t_ret,l_type) = info_ast_to_info ia in
+      let lst= (List.map analyse_expression (fusion la l_type)) in
+      let nla =(List.fold_right (fun x y -> x^y) lst "") in
+      nla^"CALL (SB) "^nom^"\n" 
+    |AstType.Null -> ""
+    |AstType.New(t) -> let ta=getTaille t in
+    "LOADL "^(string_of_int ta)^ " \n"^"SUBR Malloc \n"
+    |AstType.Adresse(ia)-> begin
+                            match info_ast_to_info ia with
+                            | InfoVar(_, t, reg, dep) -> "LOADA ("^(string_of_int(getTaille t))^") "^(string_of_int reg)^"["^dep^"]\n"
+                            | _ -> failwith ""
+                          end
 
   let rec analyse_instruction tr tp i  =
   match i with 
@@ -180,11 +193,7 @@ let rec fusion l1 l2=
   |AstType.Affectation(a,e) -> let (codea,t) = analyse_affectable_gauche a in
     let codee=analyse_expression (e,t) in
     let taille=string_of_int (getTaille t) in
-<<<<<<< HEAD
     (codee^codea^"STOREI ("^taille^") \n",0)
-=======
-      (codee^"STORE ("^taille^") "^(string_of_int add)^"["^reg^"] \n",0)
->>>>>>> 0adde7004007642b40f31cf7d61b78170ac1b82a
   |AstType.AffichageInt(e) -> let codee=analyse_expression (e,Int) in
     (codee^"SUBR IOut \n",0)
   |AstType.AffichageRat(e) -> let codee=analyse_expression (e,Rat) in
@@ -230,7 +239,7 @@ let rec fusion l1 l2=
     debu^nlf^"main \n"^nbl^"HALT \n"
 
   and  analyse_fonction f = 
-     let (Fonction(ia,nlpi,nb)) = f in 
+     let (Fonction(ia,_,nb)) = f in 
      let InfoFun(nom,t_ret,l_type) = info_ast_to_info ia in
      let listtaille = List.map getTaille l_type in 
      let taille = List.fold_left (fun x y -> x+y) 0 listtaille in 

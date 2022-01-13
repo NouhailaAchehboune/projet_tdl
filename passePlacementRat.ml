@@ -9,17 +9,20 @@ struct
   type t1 = Ast.AstType.programme
   type t2 = Ast.AstPlacement.programme
 
-  let get_type ia =
-    let InfoVar(n,t,_,_) = info_ast_to_info ia in t
+   let get_type ia =
+    match info_ast_to_info ia with
+    | InfoVar(_,t,_,_) ->  t
+    | InfoConst _ -> Int
+    | _ -> failwith ""
 
   let rec analyser_instruction reg dep i =
     match i with
-    |AstType.Declaration(ia,e)-> let t = getTaille(get_type ia) in
+    |AstType.Declaration(ia,_)-> let t = getTaille(get_type ia) in
       (modifier_adresse_info dep reg ia) ;
       (i, t+dep)
-    |AstType.TantQue(e,b)-> let _= analyser_bloc reg dep b in
+    |AstType.TantQue(_,b)-> let _= analyser_bloc reg dep b in
       (i,dep)
-    |AstType.Conditionnelle(e,bt,be)-> let _=analyser_bloc reg dep bt in 
+    |AstType.Conditionnelle(_,bt,be)-> let _=analyser_bloc reg dep bt in 
       let _ =analyser_bloc reg dep be in 
       (i,dep)
     |_ -> (i,dep)

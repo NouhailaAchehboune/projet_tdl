@@ -103,15 +103,11 @@ struct
     | Entier of int
     | Unaire of AstSyntax.unaire * expression
     | Binaire of AstSyntax.binaire * expression * expression
-<<<<<<< HEAD
     | Null
     | New of typ
     | Adresse of Tds.info_ast (* le nom de l'identifiant est remplacé par ses informations *)
 
  
-=======
-  
->>>>>>> 0adde7004007642b40f31cf7d61b78170ac1b82a
   (* instructions existantes dans notre langage *)
   (* ~ instruction de l'AST syntaxique où les noms des identifiants ont été
   remplacés par les informations associées aux identificateurs
@@ -150,7 +146,7 @@ type unaire = Numerateur | Denominateur
 type binaire = Fraction | PlusInt | PlusRat | MultInt | MultRat | EquInt | EquBool | Inf
 
 (* Affectable de Rat *)
-  type affectable =
+type affectable =
     | Ident of Tds.info_ast 
     | Deref of affectable
 
@@ -173,13 +169,9 @@ type expression =
 type bloc = instruction list
  and instruction =
   | Declaration of Tds.info_ast * expression
-<<<<<<< HEAD
   | Affectation of affectable * expression
-=======
-  | Affectation of Tds.info_ast * expression
   | AjoutInt of Tds.info_ast * expression
   | AjoutRat of Tds.info_ast * expression
->>>>>>> 0adde7004007642b40f31cf7d61b78170ac1b82a
   | AffichageInt of expression
   | AffichageRat of expression
   | AffichageBool of expression

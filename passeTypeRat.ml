@@ -45,8 +45,14 @@ struct
   
   let rec analyse_type_affectable a=
     match a with
-    |AstTds.Ident(ia) ->
-    (AstType.Ident(ia), get_type ia)
+    |AstTds.Ident(ia) -> (AstType.Ident(ia), get_type ia)
+    |AstTds.Deref(a)-> let (na,ta) = analyse_type_affectable a in
+                        begin
+                        match ta with
+                        |Pointeur(t)-> (AstType.Deref(na),t)
+                        |_ -> (raise (PasUnPointeur (ta)))
+                        end
+
 
   
   let rec analyse_type_expression e = 
@@ -89,6 +95,15 @@ struct
         |Inf->(AstType.Binaire(nb, (fst ne1),(fst ne2)),Bool )
       end
     else (raise (TypeBinaireInattendu (b, (snd ne1), (snd ne2))))
+    | AstTds.Null-> ( AstType.Null , Pointeur(Undefined))
+    | AstTds.New(t) -> (AstType.New(t),Pointeur(t))
+    | AstTds.Adresse(ia) -> begin
+                            match (info_ast_to_info ia) with
+                            |InfoVar(_,t,_,_) -> (AstType.Adresse(ia),Pointeur(t))
+    (*  Le cas suivant ne devrait jamais avoir lieu car verifié à la passe précédente *)
+                            |_ -> failwith ""
+                            end
+
 
 let maj_type t ia = (modifier_type_info t ia)
 
@@ -103,14 +118,10 @@ let rec analyse_type_instruction tf i =
     else (raise (TypeInattendu (te,t)))
   |AstTds.Affectation(a, e) -> let (na,ta) = (analyse_type_affectable a) in 
                          let (ne,te) = (analyse_type_expression e) in
-<<<<<<< HEAD
                          if (est_compatible te ta) then 
                           AstType.Affectation(na, ne)
                          else (raise (TypeInattendu (te,ta)))
-=======
-                         if (est_compatible te t) then 
-                          AstType.Affectation(ia, ne)
-                         else (raise (TypeInattendu (te,t)))
+
   |AstTds.Ajout(ia, e) -> let t = (get_type ia) in 
                          let (ne,te) = (analyse_type_expression e) in
                          if (est_compatible te t) then 
@@ -119,7 +130,6 @@ let rec analyse_type_instruction tf i =
                            else 
                             AstType.AjoutRat(ia, ne)
                          else (raise (TypeInattendu (te,t)))
->>>>>>> 0adde7004007642b40f31cf7d61b78170ac1b82a
   |AstTds.Affichage(e) -> let (ne, te) = (analyse_type_expression e) in
                    begin
                    match te with                  

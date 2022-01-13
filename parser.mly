@@ -36,13 +36,10 @@ open Ast.AstSyntax
 %token MULT
 %token INF
 %token EOF
-<<<<<<< HEAD
 %token NULL
 %token NEW
 %token ADDR
-=======
 %token PLUSEQ
->>>>>>> 0adde7004007642b40f31cf7d61b78170ac1b82a
 
 (* Type de l'attribut synthétisé des non-terminaux *)
 %type <programme> prog
@@ -77,12 +74,8 @@ is :
 
 i :
 | t=typ n=ID EQUAL e1=e PV          {Declaration (t,n,e1)}
-<<<<<<< HEAD
 | a1=a EQUAL e1=e PV                {Affectation (a1,e1)}
-=======
 | n=ID PLUSEQ e1=e PV               {Ajout (n,e1)}
-| n=ID EQUAL e1=e PV                {Affectation (n,e1)}
->>>>>>> 0adde7004007642b40f31cf7d61b78170ac1b82a
 | CONST n=ID EQUAL e=ENTIER PV      {Constante (n,e)}
 | PRINT e1=e PV                     {Affichage (e1)}
 | IF exp=e li1=bloc ELSE li2=bloc   {Conditionnelle (exp,li1,li2)}
