@@ -15,6 +15,7 @@
    
      Passe de gestion d’ID : Création d’une nouvelle fonction analyse_tds_affectable tds modif a qui prend en paramètre la Tds, l’ Affectable ainsi que le booléen modif qui apporte l’information de si l’ Affectable se trouve a droite ou a gauche d’un signe égal. Cette fonction se décompose de la manière suivante :
   si l’ Affectable est un Indentifiant, alors on Recherche Globalement, si on ne trouve pas, alors on lève une exception, si il existe, on traite en fonction du type.
+  '''
   Func→ exception
   Const → si Modif alors exception sinon EntierVal
   Var→ AstTds.Indent(Info).
@@ -30,7 +31,7 @@
   | | → var → AstTds.Adresse(Info) AstSyntax.Null → AstTds.null
   AstSyntax.new(t) → AstTds.New(t)
   On a aussi supprimé Ident de String du type Expression.
-  
+  '''
   # Opérateur d’assignation d’addition
   
   ## Type
