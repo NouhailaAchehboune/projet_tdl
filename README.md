@@ -40,9 +40,9 @@
   ## Type
   
     Pour l’ajout del’opérateur d’assignation d’addition dans un compilateur, on rajoute des TO- KENS pour les mots clés suivants : PLUSEQ. Ensuite, on rajoute les elements de la gram- maire définis dans le sujet relatifs à l’opérateur d’assignation d’addition. Ces changements permettent de modifier les différentes AST.
-  Pour l’AST syntaxe : Dans instruction, on rajoute un type Ajout of String
-  Pour l’AST TDS : Dans instruction, on modifie le type Ajout of String en Ajout of Info_Ast Pour l’AST Type : Dans instruction, on sépare le type Ajout of String en deux types AjoutInt of tds.Info_Ast*expression et AjoutRat of tds.Info_Ast*expression
-  
+    Pour l’AST syntaxe : Dans instruction, on rajoute un type Ajout of String
+    Pour l’AST TDS : Dans instruction, on modifie le type Ajout of String en Ajout of Info_Ast Pour l’AST Type : Dans instruction, on sépare le type Ajout of String en deux types AjoutInt of tds.Info_Ast*expression et AjoutRat of tds.Info_Ast*expression
+
   ## Modification des passes 
   
         Passe TdsRat : Pour la passeTdsRat, il a fallu modifier la fonction Analyse_instruction. En effet, lors du match de ChercherGlobalement, si on trouve quelque chose, on doit rajouter un match de la manière suivante :    
