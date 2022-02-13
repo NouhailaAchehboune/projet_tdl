@@ -45,32 +45,24 @@
   
   ## Modification des passes 
   
-    Passe TdsRat : Pour la passeTdsRat, il a fallu modifier la fonction Analyse_instruction. En effet, lors du match de ChercherGlobalement, si on trouve quelque chose, on doit rajouter un match de la manière suivante :
-  match info_to_ast_info info with
-  | InfoVar _ →
-  let ne = analyse_tds_expression tds e in Ajout(info, e)
-  | _ → exception
-  Passe TypeRat : Pour la passeTypeRat, on a modifié la fonction Analyse_type_instruction pour ajouter un cas dans le match :
-  | AstTds.Ajout(ia, e) -> let t =(get_type ia) in
-  | let(ne,te) = (analyse_type_expression e) in
-    if est_compatible t te then
-  if (analyse_type_binaire Plus t te = PlusInt) then
-  | |
-  | |
-  | |
-  | |
-  | |
-  Passe CodeRatToTam : Concernant la passeRatToTam, on ajoute deux cas dans le match, qui cor- respondent aux deux types de Ajout, en fonction du type d’expression sur laquelle on l’applique.
-  AstType.AjoutInt(ia, ne) else AstType.AjoutRat(ia, ne)
-  else raise exception
-   AstType.AjoutRat(ia,e) →
-  let InfoVar(_,_,add,reg) = info_ast_to_info ia in
-  |
-  |
-  | | let codee = analyse_expression(e,Rat) in (...)
-  AstType.AjoutInt(ia,e) →
-  let InfoVar(_,_,add,reg) = info_ast_to_info ia in
-  |
-  |
-  | | let codee = analyse_expression(e,Int) in (...)
-  
+        Passe TdsRat : Pour la passeTdsRat, il a fallu modifier la fonction Analyse_instruction. En effet, lors du match de ChercherGlobalement, si on trouve quelque chose, on doit rajouter un match de la manière suivante :    
+    match info_to_ast_info info with.  
+    | InfoVar _ →      
+            let ne = analyse_tds_expression tds e in Ajout(info, e)   
+    | _ → exception    
+      Passe TypeRat : Pour la passeTypeRat, on a modifié la fonction Analyse_type_instruction pour ajouter un cas dans le match :  
+    | AstTds.Ajout(ia, e) -> let t =(get_type ia) in  
+        | let(ne,te) = (analyse_type_expression e) in  
+            if est_compatible t te then  
+              if (analyse_type_binaire Plus t te = PlusInt) then  
+                 AstType.AjoutInt(ia, ne)   
+              else AstType.AjoutRat(ia, ne)   
+            else raise exception   
+Passe CodeRatToTam : Concernant la passeRatToTam, on ajoute deux cas dans le match, qui cor- respondent aux deux types de Ajout, en fonction du type d’expression sur laquelle on l’applique.  
+|AstType.AjoutRat(ia,e) →   
+let InfoVar(_,_,add,reg) = info_ast_to_info ia in   
+           let codee = analyse_expression(e,Rat) in (...)   
+           
+|AstType.AjoutInt(ia, e) -> 
+           let InfoVar(_,_,add,reg) = info_ast_to_info ia in  
+           let codee = analyse_expression(e,Int) in (...)   
