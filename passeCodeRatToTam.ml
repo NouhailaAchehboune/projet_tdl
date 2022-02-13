@@ -111,20 +111,34 @@ let ecrireFichier nom texte =
   output_string fich texte ;
   close_out fich
 
+(* fusion : 'a list -> ('a * 'a) list *)
+(* Paramètre l1 : Une première liste *)
+(* Paramètre l2 : Une deuxième liste *)
+(* Fusionne les deux listes en une liste de couples *)
 let rec fusion l1 l2=
   match l1,l2 with 
   | [],[] -> [] 
   | d1::q1, d2::q2 -> (d1,d2)::(fusion q1 q2)
 
+(* get_type : info_ast -> typ *)
+(* Paramètre ia : Une info_ast d'une variable *)
+(* Renvoie le type récupéré de l'info_ast *)
+(* Erreur si mauvaise utilisation de la fonction *)
   let get_type ia =
     let InfoVar(n,t,_,_) = info_ast_to_info ia in t
 
+(* analyse_unaire : unaire -> string *)
+(* Paramètre L'unaire à traiter*)
+(* Renvoie le code tam nécessaire si on veut récuperer un unaire en sommet de pile  *)
   let analyse_unaire u =
     if (u=AstType.Numerateur) then
       "POP (0) 1 \n"
     else
       "POP (1) 1 \n"
-  
+
+(* analyse_binaire : binaire -> string *)
+(* Paramètre b : le binaire à traiter *)
+(* Renvoie le code tam de l'appelle de fonction qui réalise le binaire *)
   let analyse_binaire b =
    match b with
     |AstType.PlusInt -> ("SUBR IAdd \n",Int)
@@ -136,7 +150,44 @@ let rec fusion l1 l2=
     |AstType.Inf->("SUBR ILss \n",Int)
     |AstType.Fraction-> ("",Int)
 
-  let rec analyse_affectable (a,t)=
+(* position_var : (typ * string)list -> int *)
+(* Paramètre Enre(le) : l'enregistrement à traiter *)
+(* Paramètre id : l'id du champ dont on veut récuperer la position *)
+(* Renvoie lla position de l'id dans l'enregistrement *)
+(* Erreur si mauvaise utilisation de la fonction *)
+    let rec position_var (Enre(le)) id =
+        match le with
+        | (t,nom)::q ->if (id=nom) then 0
+                        else (getTaille t)+(position_var (Enre(q)) id)
+        | [] -> failwith ""  
+
+(* analyse_affectable_gauche :  affectable-> string *)
+(* Paramètre a : l'affectable se trouvant à gauche dans le code *)
+(* Renvoie le code tam pour l'affectable qui se trouve à gauche *)
+(* Erreur si mauvaise utilisation de la fonction *)
+   let rec analyse_affectable_gauche a=
+    match a with
+    |AstType.Ident(ia)-> let InfoVar(_,t,add,reg) = info_ast_to_info ia in
+        ("LOADA "^string_of_int add^"["^reg^"] \n",t)
+    |AstType.Deref(a1) -> let (codea,ta)=analyse_affectable_gauche a1 in
+                            begin
+                            match ta with
+                            |Pointeur(t)-> let taille = getTaille t in
+                                  (codea^"LOADI ("^(string_of_int taille)^") \n",t)
+                            |_ -> failwith ""
+                            end 
+    |AstType.Acces(a1,ia)-> let AstType.Ident(ia)=a1 in
+                            let InfoVar(_,t,add,reg)=info_ast_to_info ia in
+                            let InfoVar(nom,_,_,_)=info_ast_to_info ia in
+                            let pos=position_var t nom in
+                            ("LOADA "^string_of_int (add+pos)^"["^reg^"] \n",Undefined)
+                            
+(* analyse_affectable :  affectable -> typ-> string *)
+(* Paramètre a : l'affectable se trouvant à droite dans le code *)
+(*Paramètre t : le type de l'affectable *)
+(* Renvoie le code tam pour l'affectable qui se trouve à gauche *)
+(* Erreur si mauvaise utilisation de la fonction *)   
+    let rec analyse_affectable (a,t)=
     match a with
     |AstType.Ident(ia)-> begin 
                           match info_ast_to_info ia with 
@@ -147,12 +198,15 @@ let rec fusion l1 l2=
                         end
     |AstType.Deref(a1) -> let na= analyse_affectable (a1,t) in
                           na^"LOADI ("^(string_of_int(getTaille t))^") \n"
-
-  let rec analyse_affectable_gauche a=
-    match a with
-    |AstType.Ident(ia)-> let InfoVar(_,t,add,reg) = info_ast_to_info ia in
-        ("LOADA "^string_of_int add^"["^reg^"] \n",t)
-    |AstType.Deref(a1) -> analyse_affectable_gauche a1
+                          (*On appelle analyse_affectable_gauche car on a pas acces au type de a1*)
+    | AstType.Acces(a1,ia) -> let (na,t) = analyse_affectable_gauche (a1) in
+                              let InfoVar(nom,t_ia,_,_) = info_ast_to_info ia in
+                              let pos = position_var t nom in
+                              let taille=getTaille t_ia in 
+                              let pos1=pos+taille in
+                              na^"LOADI ("^(string_of_int(pos+taille))^") \n"^"POP ("^(string_of_int taille)^") "^(string_of_int pos)^" \n"
+  
+   
 
   let rec analyse_expression (e,t) =
     match e with
@@ -183,7 +237,10 @@ let rec fusion l1 l2=
                             | InfoVar(_, t, reg, dep) -> "LOADA ("^(string_of_int(getTaille t))^") "^(string_of_int reg)^"["^dep^"]\n"
                             | _ -> failwith ""
                           end
-
+    |AstType.Creation(le) ->let Enre(lt)=t in
+        let lst= (List.map analyse_expression (fusion le (List.map fst lt))) in
+        let nla =(List.fold_right (fun x y -> x^y) lst "") in
+                              nla
   let rec analyse_instruction tr tp i  =
   match i with 
   |AstType.Declaration(ia,e) -> let InfoVar(_,t,add,reg) = info_ast_to_info ia in

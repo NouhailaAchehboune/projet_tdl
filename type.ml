@@ -16,7 +16,9 @@ let rec est_compatible t1 t2 =
   | Rat, Rat -> true 
   | Pointeur(tt1), Pointeur(tt2) -> if (est_compatible tt1 tt2) then true
                                       else false
-  | Enre((a,b)::q), Enre((c,d)::p)-> if ((est_compatible a c)&&(b=d)) then 
+  | Undefined, _ -> true
+  | _ , Undefined -> true
+  | Enre((a,_)::q), Enre((c,_)::p)-> if (est_compatible a c) then 
                                        if p=[]&& q=[] then 
                                         true
                                        else
