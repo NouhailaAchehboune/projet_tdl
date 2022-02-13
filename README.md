@@ -1,0 +1,2 @@
+# projet_tdl
+Pour ce projet, nous devions étendre le compilateur de RAT pour qu’il soit capable de traiter les pointeurs, l’opérateur d’assignation d’addition, la création de types nommés ainsi que les enregistrements. Il faudra donc adapter les analyseurs lexicaux et syntaxiques puis coder plusieurs passes en Ocaml, à savoir la passe de gestion d’ID, la passe de typage, la passe de placement mémoire et enfin la passe de génération de code.
