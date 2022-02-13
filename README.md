@@ -15,23 +15,23 @@
    
      Passe de gestion d’ID : Création d’une nouvelle fonction analyse_tds_affectable tds modif a qui prend en paramètre la Tds, l’ Affectable ainsi que le booléen modif qui apporte l’information de si l’ Affectable se trouve a droite ou a gauche d’un signe égal. Cette fonction se décompose de la manière suivante :
   si l’ Affectable est un Indentifiant, alors on Recherche Globalement, si on ne trouve pas, alors on lève une exception, si il existe, on traite en fonction du type.
-  '''
-  Func→ exception
-  Const → si Modif alors exception sinon EntierVal
-  Var→ AstTds.Indent(Info).
-  si l’ Affectable est un Dereferencement
-  → AstTds.deref( analyse_tds_affectable tds modif a).
-  Modification de la fonction analyse_type_instruction pour modifier le cas
-  Affectation(a,e) → let na = analyse_tds_affectable tds true a in
-  let ne = analyse_tds_expression tds e in Affectation(na, ne)
-  Ainsi que la fonction analyse_tds_expression pour ajouter les cas
-  Affectable(a) → let na = analyse_tds_affectable tds faslse a in Affectable(na). AstSyntax.Adresse(n) → recherche_globale
-  | None → exception
-  | Some → Fun or Cst → exception
-  | | → var → AstTds.Adresse(Info) AstSyntax.Null → AstTds.null
-  AstSyntax.new(t) → AstTds.New(t)
-  On a aussi supprimé Ident de String du type Expression.
-  '''
+
+      *Func→ exception
+      *Const → si Modif alors exception sinon EntierVal
+      *Var→ AstTds.Indent(Info).
+      *si l’ Affectable est un Dereferencement
+          → AstTds.deref( analyse_tds_affectable tds modif a).
+      *Modification de la fonction analyse_type_instruction pour modifier le cas
+           Affectation(a,e) → let na = analyse_tds_affectable tds true a in
+      *let ne = analyse_tds_expression tds e in Affectation(na, ne)
+     * Ainsi que la fonction analyse_tds_expression pour ajouter les cas
+      Affectable(a) → let na = analyse_tds_affectable tds faslse a in Affectable(na). AstSyntax.Adresse(n) → recherche_globale.
+      | None → exception.
+      | Some → Fun or Cst → exception.
+      | | → var → AstTds.Adresse(Info) AstSyntax.Null → AstTds.null.
+      AstSyntax.new(t) → AstTds.New(t).
+      On a aussi supprimé Ident de String du type Expression.
+
   # Opérateur d’assignation d’addition
   
   ## Type
